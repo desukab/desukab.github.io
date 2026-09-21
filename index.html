@@ -458,6 +458,36 @@
       .hero-visual:before,.hero-visual:after,.product-card:after,.tour-card:after,.outcome:after,.signal-card:after{animation:none!important}
     }
 
+  
+    /* V4 — cinematic enterprise interaction layer */
+    .cinematic-rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:35;display:grid;gap:9px;pointer-events:none}
+    .cinematic-rail span{width:3px;height:3px;border-radius:50%;background:#383838;transition:transform .5s var(--ease-expo),background .3s,box-shadow .3s}
+    .cinematic-rail span.active{transform:scale(2.4);background:var(--accent);box-shadow:0 0 14px var(--accent)}
+    .hero-copy .lead,.hero-note,.buttons{opacity:0;transform:translateY(22px);animation:enterUp 1s var(--ease-expo) forwards}
+    .hero-copy .lead{animation-delay:.45s}.hero-note{animation-delay:.6s}.hero-copy .buttons{animation-delay:.72s}
+    .eyebrow,.hero-kicker{opacity:0;animation:enterFade .8s var(--ease-expo) .1s forwards}
+    h1{perspective:900px}.hero-word,.hero-glitch{animation:heroWordIn 1.15s var(--ease-expo) .18s both}.hero-glitch{animation-delay:.32s}
+    .experience-shell{transition:transform .8s var(--ease-expo),box-shadow .8s var(--ease-expo)}
+    .experience-shell.is-active{box-shadow:0 60px 160px rgba(0,0,0,.55),0 0 80px rgba(217,255,74,.045)}
+    .console-body{transition:filter .5s ease}.console-body.processing{filter:brightness(1.12)}
+    .story-row{cursor:pointer}.story-row .confidence{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 12px rgba(217,255,74,.45);transition:width .8s var(--ease-expo)}
+    .story-row.selected .confidence{width:var(--confidence,70%)}
+    .decision-pane .status-pulse{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);margin-right:6px;animation:pulseDot 1.4s infinite}
+    .preview-timeline{overflow:hidden}.preview-timeline:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(217,255,74,.08),transparent);transform:translateX(-100%);animation:timelineSweep 3.6s ease-in-out infinite}
+    .demo-rail{scroll-behavior:smooth}.tour-card{transition:transform .65s var(--ease-expo),opacity .45s,border-color .3s,box-shadow .5s}.tour-card:not(.active-card){opacity:.72}.tour-card.active-card{opacity:1}
+    .output-pair div{transition:transform .45s var(--ease-expo),border-color .25s,background .25s}.output-pair div:hover{transform:translateY(-5px);border-color:#56641f;background:#101500}
+    .outcome .big{transition:transform .6s var(--ease-expo),color .4s}.outcome:hover .big{transform:translateX(8px);color:#fff}
+    .manifesto{position:relative;overflow:hidden}.manifesto:before{content:"";position:absolute;left:50%;top:10%;width:1px;height:80%;background:linear-gradient(transparent,rgba(217,255,74,.22),transparent);transform:scaleY(.2);transform-origin:center;transition:transform 1.8s var(--ease-expo)}.manifesto.in-view:before{transform:scaleY(1)}
+    .build .cta-inner{transition:transform .7s var(--ease-expo),border-color .4s,box-shadow .7s}.build .cta-inner:hover{transform:translateY(-8px);border-color:#4b4b4b;box-shadow:0 40px 100px rgba(0,0,0,.4)}
+    .terminal-stream{position:absolute;right:20px;bottom:18px;font:7px NDot57,monospace;color:#444;line-height:1.7;text-align:right;pointer-events:none}.terminal-stream b{color:var(--accent);font-weight:400}
+    .data-trace{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.18;pointer-events:none}.data-trace.t1{width:45%;top:16%;left:-45%;animation:traceMove 8s linear infinite}.data-trace.t2{width:28%;top:73%;right:-28%;animation:traceMoveReverse 6s 1.4s linear infinite}
+    .section-reveal-line{height:1px;background:linear-gradient(90deg,var(--accent),transparent);width:0;margin-top:18px;transition:width 1.2s var(--ease-expo)}.reveal.in .section-reveal-line{width:100%}
+    @keyframes enterUp{to{opacity:1;transform:none}}@keyframes enterFade{to{opacity:1}}@keyframes heroWordIn{from{opacity:0;transform:translateY(55px) rotateX(45deg)}to{opacity:1;transform:none}}
+    @keyframes timelineSweep{0%,45%{transform:translateX(-100%)}75%,100%{transform:translateX(100%)}}@keyframes traceMove{0%{transform:translateX(0);opacity:0}15%{opacity:.35}70%{opacity:.2}100%{transform:translateX(500%);opacity:0}}@keyframes traceMoveReverse{0%{transform:translateX(0);opacity:0}15%{opacity:.35}70%{opacity:.2}100%{transform:translateX(-500%);opacity:0}}
+    @media(max-width:850px){.cinematic-rail{left:auto;right:9px;gap:8px}.cinematic-rail span{width:2px;height:2px}.terminal-stream{right:12px;bottom:12px;font-size:6px}}
+    @media(max-width:600px){.cinematic-rail{display:none}.manifesto:before{left:8%;right:8%;width:auto;top:auto;bottom:18px;height:1px;transform:scaleX(.15)}.manifesto.in-view:before{transform:scaleX(1)}.terminal-stream{display:none}}
+    @media(prefers-reduced-motion:reduce){.cinematic-rail,.terminal-stream,.data-trace{display:none}.hero-copy .lead,.hero-note,.buttons,.eyebrow,.hero-kicker,.hero-word,.hero-glitch{opacity:1;transform:none;animation:none}.preview-timeline:after{animation:none}}
+
   </style>
 </head>
 <body>
@@ -482,7 +512,7 @@
 </header>
 <div class="scroll-progress" aria-hidden="true"><i id="scrollProgress"></i></div>
 <div class="spotlight" id="spotlight" aria-hidden="true"></div>
-<div class="noise" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div><div class="cinematic-rail" id="cinematicRail" aria-hidden="true"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <div class="motion-grid" id="motionGrid" aria-hidden="true"></div>
 <div class="motion-orb one" id="orbOne" aria-hidden="true"></div>
 <div class="motion-orb two" id="orbTwo" aria-hidden="true"></div>
@@ -545,7 +575,7 @@
     <div class="wrap">
       <div class="section-head">
         <div class="num mono">02 / THE IDEA</div>
-        <div><h2>Editors should start with a story — not a mountain of footage.</h2><p class="sub">Long recordings contain the useful moment somewhere inside hours of context, repetition and dead air. SeleKyT is being built to do the painful first pass before the editor takes over.</p></div>
+        <div><h2>Editors should start with a story — not a mountain of footage.</h2><p class="sub">Long recordings contain the useful moment somewhere inside hours of context, repetition and dead air. SeleKyT is being built to do the painful first pass before the editor takes over.<div class="section-reveal-line"></div></p></div>
       </div>
       <div class="product-grid">
         <div class="product-card large">
@@ -565,12 +595,12 @@
     <div class="wrap">
       <div class="section-head">
         <div class="num mono">03 / THE PRODUCT</div>
-        <div><h2>Don't take our word for it. Watch the decision layer move.</h2><p class="sub">A tactile product visualization of the core idea: source footage becomes structured editorial decisions, then an editable sequence.</p></div>
+        <div><h2>Don't take our word for it. Watch the decision layer move.</h2><p class="sub">A tactile product visualization of the core idea: source footage becomes structured editorial decisions, then an editable sequence.<div class="section-reveal-line"></div></p></div>
       </div>
-      <div class="experience-shell reveal">
-        <div class="console-bar"><div class="console-dots"><i></i><i></i><i></i></div><span>SELEKYT_EDITORIAL_ENGINE / LIVE PREVIEW</span><span>LOCAL-FIRST</span></div>
+      <div class="experience-shell reveal" id="productConsole">
+        <div class="console-bar"><div class="console-dots"><i></i><i></i><i></i></div><span><i class="status-pulse"></i>SELEKYT_EDITORIAL_ENGINE / LIVE PREVIEW</span><span>LOCAL-FIRST</span></div>
         <div class="console-body">
-          <div class="source-pane">
+          <div class="source-pane"><div class="data-trace t1"></div><div class="data-trace t2"></div>
             <div class="pane-label">SOURCE / LONG-FORM</div>
             <div class="source-title">2:47:18<br><span style="color:#555">raw footage</span></div>
             <div class="source-meta"><div><span>INPUT</span><b>VIDEO</b></div><div><span>UNDERSTANDING</span><b>TRANSCRIPT + CONTEXT</b></div><div><span>MODE</span><b>EDITORIAL FIRST PASS</b></div></div>
@@ -578,14 +608,14 @@
               <i class="" style="height:18px;--n:0"></i><i class="" style="height:55px;--n:1"></i><i class="" style="height:20px;--n:2"></i><i class="" style="height:57px;--n:3"></i><i class="" style="height:22px;--n:4"></i><i class="hot" style="height:59px;--n:5"></i><i class="hot" style="height:24px;--n:6"></i><i class="" style="height:61px;--n:7"></i><i class="" style="height:26px;--n:8"></i><i class="" style="height:63px;--n:9"></i><i class="" style="height:28px;--n:10"></i><i class="" style="height:65px;--n:11"></i><i class="hot" style="height:30px;--n:12"></i><i class="" style="height:67px;--n:13"></i><i class="" style="height:32px;--n:14"></i><i class="" style="height:69px;--n:15"></i><i class="" style="height:34px;--n:16"></i><i class="" style="height:71px;--n:17"></i><i class="hot" style="height:36px;--n:18"></i><i class="" style="height:73px;--n:19"></i><i class="" style="height:38px;--n:20"></i><i class="" style="height:75px;--n:21"></i><i class="" style="height:40px;--n:22"></i><i class="hot" style="height:77px;--n:23"></i><i class="hot" style="height:42px;--n:24"></i><i class="" style="height:79px;--n:25"></i><i class="" style="height:44px;--n:26"></i><i class="" style="height:81px;--n:27"></i><i class="" style="height:46px;--n:28"></i><i class="hot" style="height:83px;--n:29"></i><i class="" style="height:48px;--n:30"></i><i class="" style="height:85px;--n:31"></i>
             </div>
           </div>
-          <div class="decision-pane">
+          <div class="decision-pane"><div class="terminal-stream"><b>EDITORIAL SIGNAL</b><br>SCANNING SOURCE<br>RANKING MOMENTS<br>BUILDING FIRST PASS</div>
             <div class="decision-head"><h3>Story candidates</h3><span>REASONING / ACTIVE</span></div>
             <div class="story-list">
-              <div class="story-row selected"><span class="index">01</span><strong>The origin story</strong><small>SELECT</small></div>
-              <div class="story-row"><span class="index">02</span><strong>The turning point</strong><small>REVIEW</small></div>
-              <div class="story-row selected"><span class="index">03</span><strong>The payoff</strong><small>SELECT</small></div>
-              <div class="story-row"><span class="index">04</span><strong>Supporting context</strong><small>REVIEW</small></div>
-              <div class="story-row"><span class="index">05</span><strong>Repetition</strong><small>DROP</small></div>
+              <div class="story-row selected" style="--confidence:94%"><span class="index">01</span><strong>The origin story</strong><small>SELECT</small><i class="confidence"></i></div>
+              <div class="story-row" style="--confidence:88%"><span class="index">02</span><strong>The turning point</strong><small>REVIEW</small><i class="confidence"></i></div>
+              <div class="story-row selected" style="--confidence:91%"><span class="index">03</span><strong>The payoff</strong><small>SELECT</small><i class="confidence"></i></div>
+              <div class="story-row" style="--confidence:72%"><span class="index">04</span><strong>Supporting context</strong><small>REVIEW</small><i class="confidence"></i></div>
+              <div class="story-row" style="--confidence:31%"><span class="index">05</span><strong>Repetition</strong><small>DROP</small><i class="confidence"></i></div>
             </div>
             <div class="editor-preview">
               <div class="preview-label"><span>FIRST PASS / EDITABLE</span><span>16:9 + 9:16</span></div>
@@ -602,7 +632,7 @@
     <div class="wrap">
       <div class="section-head">
         <div class="num mono">05 / INTERACTIVE</div>
-        <div><h2>Watch the edit happen.</h2><p class="sub">Don't read a feature list. Swipe, drag or use the arrows. This is the product idea in six moves.</p></div>
+        <div><h2>Watch the edit happen.</h2><p class="sub">Don't read a feature list. Swipe, drag or use the arrows. This is the product idea in six moves.<div class="section-reveal-line"></div></p></div>
       </div>
       <div class="demo-launch">
         <div><span class="demo-mini mono">PRODUCT TOUR · 01—06</span><h3>From raw footage<br>to an editable story.</h3></div>
@@ -653,7 +683,7 @@
     <div class="wrap">
       <div class="section-head">
         <div class="num mono">06 / THE OUTCOME</div>
-        <div><h2>Less scrubbing. More editing.</h2><p class="sub">The public story is simple. SeleKyT handles the repetitive first pass so a human can spend more time on judgment, taste and the final cut.</p></div>
+        <div><h2>Less scrubbing. More editing.</h2><p class="sub">The public story is simple. SeleKyT handles the repetitive first pass so a human can spend more time on judgment, taste and the final cut.<div class="section-reveal-line"></div></p></div>
       </div>
       <div class="outcome-grid">
         <div class="outcome"><div class="big mono">01</div><h3>FIND</h3><p>Surface story units and moments worth looking at instead of starting from zero.</p></div>
@@ -930,6 +960,35 @@
   document.addEventListener('keydown',e=>{
     if(e.key==='Tab')document.documentElement.classList.add('keyboard-nav');
   },{passive:true});
+})();
+
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  const dots=[...document.querySelectorAll('#cinematicRail span')];
+  const sections=[...document.querySelectorAll('main > section')];
+  function updateRail(){
+    let best=0,score=-1;
+    sections.forEach((s,i)=>{const r=s.getBoundingClientRect(),v=Math.max(0,Math.min(r.bottom,innerHeight)-Math.max(r.top,0));if(v>score){score=v;best=i}});
+    dots.forEach((d,i)=>d.classList.toggle('active',i===best));
+  }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')}),{threshold:.18});
+  sections.forEach(s=>io.observe(s));addEventListener('scroll',updateRail,{passive:true});updateRail();
+
+  const console=document.getElementById('productConsole'),rows=[...document.querySelectorAll('.story-row')],body=document.querySelector('.console-body');
+  let step=0,timer;
+  function cycle(){
+    if(document.hidden)return;
+    rows.forEach((r,i)=>r.classList.toggle('selected',i===step||i===(step+2)%rows.length));
+    if(body){body.classList.add('processing');setTimeout(()=>body.classList.remove('processing'),420)}
+    step=(step+1)%rows.length;
+  }
+  if(console){
+    const cio=new IntersectionObserver(es=>{
+      if(es[0].isIntersecting){clearInterval(timer);timer=setInterval(cycle,2100);cycle()}
+      else clearInterval(timer);
+    },{threshold:.4});cio.observe(console);
+  }
 })();
 </script>
 </body>
