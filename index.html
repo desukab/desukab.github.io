@@ -2,169 +2,368 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#070707">
-  <meta name="description" content="SelekyT — an AI-native editorial engine that turns long-form video into structured, editable, publishable stories.">
+  <meta name="description" content="SelekyT turns long-form video into an editable editorial starting point.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="SelekyT — AI Editorial Engine">
-  <meta property="og:description" content="Turn long-form video into structured, editable, publishable stories.">
+  <meta property="og:title" content="SelekyT — The first editorial pass, automated.">
+  <meta property="og:description" content="Long-form video in. An editable editorial starting point out.">
   <meta property="og:url" content="https://desukab.github.io/">
   <meta name="twitter:card" content="summary_large_image">
-  <title>SelekyT — AI Editorial Engine</title>
+  <title>SelekyT — The first editorial pass, automated.</title>
   <style>
-    @font-face{font-family:"NDot57";src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ndot57.ttf") format("truetype");font-display:swap}
-    @font-face{font-family:"NType82";src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ntype82-regular.otf") format("opentype");font-display:swap}
-    :root{--bg:#070707;--panel:#0d0d0d;--line:#242424;--text:#f4f4f0;--muted:#999;--soft:#c9c9c2;--accent:#d9ff4a;--max:1180px}
+    @font-face{font-family:NDot57;src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ndot57.ttf") format("truetype");font-display:swap}
+    @font-face{font-family:NType82;src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ntype82-regular.otf") format("opentype");font-display:swap}
+    :root{--bg:#070707;--panel:#0d0d0d;--panel2:#111;--line:#262626;--text:#f4f4ef;--muted:#8d8d87;--dim:#5d5d58;--accent:#d9ff4a;--max:1180px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:"NType82","NType",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:NType82,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;overflow-x:hidden}
     a{color:inherit;text-decoration:none}
+    button{font:inherit}
     .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
-    .mono{font-family:"NDot57","NDot","SFMono-Regular",Consolas,monospace}
-    header{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(7,7,7,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .mono{font-family:NDot57,"SFMono-Regular",Consolas,monospace}
+    header{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(7,7,7,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
     nav{height:68px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px;font-family:"NDot57","NDot",monospace;font-weight:400;letter-spacing:.02em;font-size:23px}
+    .brand{display:flex;align-items:center;gap:12px;font-family:NDot57,monospace;font-size:23px}
     .logo{width:28px;height:28px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;flex:none}
-    .logo span{border:2px solid var(--text);display:block;border-radius:1px}
+    .logo span{border:2px solid var(--text);border-radius:1px}
     .logo span:nth-child(2),.logo span:nth-child(4),.logo span:nth-child(5),.logo span:nth-child(8),.logo span:nth-child(9){border-color:var(--accent)}
-    .logo span:nth-child(5){background:var(--accent);border-color:var(--accent)}
-    .links{display:flex;gap:26px;color:#aaa;font-size:13px}.links .social{color:var(--accent)}
+    .logo span:nth-child(5){background:var(--accent)}
+    .links{display:flex;gap:24px;color:#999;font-size:12px;align-items:center}
     .links a:hover{color:#fff}
+    .links .social{color:var(--accent)}
     .nav-cta{border:1px solid #383838;border-radius:999px;padding:9px 15px;font-size:12px}
     .nav-cta:hover{border-color:#777}
+    .menu-btn{display:none;border:1px solid #333;background:#0b0b0b;color:#eee;border-radius:999px;padding:9px 13px;cursor:pointer}
+    .mobile-menu{display:none}
     .hero{min-height:92vh;display:flex;align-items:center;padding:150px 0 90px;border-bottom:1px solid var(--line)}
-    .eyebrow{color:var(--accent);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:25px}
-    h1{font-size:clamp(56px,9vw,122px);line-height:.88;letter-spacing:-.075em;max-width:1050px;margin:0 0 34px;font-weight:800}
+    .eyebrow{color:var(--accent);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
+    h1{font-size:clamp(54px,9vw,122px);line-height:.88;letter-spacing:-.075em;max-width:1050px;margin:0 0 34px;font-weight:800}
     h1 span{color:#666}
-    .hero-copy{display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:end}
+    .hero-copy{display:grid;grid-template-columns:1fr 330px;gap:60px;align-items:end}
     .lead{font-size:clamp(19px,2.2vw,27px);letter-spacing:-.025em;color:#d0d0ca;max-width:780px;margin:0}
-    .hero-note{font-size:12px;color:#777;border-left:1px solid #444;padding-left:18px}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px}
-    .button{padding:13px 19px;border-radius:5px;border:1px solid #393939;font-size:13px;font-weight:650}
+    .hero-note{font-size:11px;color:#777;border-left:1px solid #444;padding-left:18px}
+    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+    .button{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:5px;border:1px solid #393939;font-size:12px;font-weight:650;transition:transform .2s,border-color .2s}
     .button.primary{background:var(--accent);color:#080808;border-color:var(--accent)}
-    .button:hover{transform:translateY(-1px)}
+    .button:hover{transform:translateY(-2px);border-color:#777}
     section{padding:105px 0;border-bottom:1px solid var(--line)}
-    .section-head{display:grid;grid-template-columns:180px 1fr;gap:40px;margin-bottom:55px}
-    .num{font-size:11px;color:var(--accent);letter-spacing:.15em}
-    h2{font-size:clamp(34px,5vw,65px);line-height:.95;letter-spacing:-.06em;margin:0;max-width:820px}
-    .sub{color:#888;max-width:650px;margin:18px 0 0;font-size:16px}
-    .flow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line)}
-    .step{min-height:190px;padding:24px;border-right:1px solid var(--line);position:relative}
-    .step:last-child{border-right:0}
-    .step b{display:block;font-size:15px;margin:55px 0 8px}
-    .step p{font-size:12px;color:#777;margin:0}
-    .step .n{position:absolute;top:18px;right:18px;color:#555;font-size:11px}
-    .showcase{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-    .card{background:var(--panel);border:1px solid var(--line);padding:30px;min-height:310px}
-    .card.large{min-height:470px}
-    .tag{font-size:10px;color:#777;letter-spacing:.14em;text-transform:uppercase}
-    .card h3{font-size:27px;letter-spacing:-.04em;margin:45px 0 12px}
-    .card p{color:#8e8e8a;max-width:570px;font-size:14px}
-    .terminal{margin-top:30px;border:1px solid #242424;background:#090909;padding:18px;color:#a9a9a0;font-size:11px;line-height:1.8;overflow:auto}
-    .terminal .green{color:var(--accent)}
-    .outputs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-    .output{background:var(--panel);padding:25px;min-height:180px}
-    .output strong{font-size:14px}
-    .output p{color:#777;font-size:12px;margin-top:14px}
-    .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .proof .card{min-height:210px}
-    .proof h3{margin:20px 0 8px;font-size:18px}
-    .proof p{font-size:13px;color:#858580;margin:0}
-    .truth{font-size:12px;color:#777;border-top:1px solid var(--line);margin-top:35px;padding-top:18px}
-    .cta{padding:120px 0}
+    .section-head{display:grid;grid-template-columns:180px 1fr;gap:40px;margin-bottom:48px}
+    .num{font-size:10px;color:var(--accent);letter-spacing:.15em}
+    h2{font-size:clamp(34px,5vw,65px);line-height:.95;letter-spacing:-.06em;margin:0;max-width:850px}
+    .sub{color:#888;max-width:680px;margin:18px 0 0;font-size:15px}
+    
+    /* Product story */
+    .product-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
+    .product-card{background:var(--panel);border:1px solid var(--line);padding:32px;min-height:300px}
+    .product-card.large{min-height:430px;display:flex;flex-direction:column;justify-content:space-between}
+    .tag{font-size:9px;color:#777;letter-spacing:.15em;text-transform:uppercase}
+    .product-card h3{font-size:clamp(25px,3vw,42px);line-height:.95;letter-spacing:-.05em;margin:42px 0 12px}
+    .product-card p{font-size:13px;color:#888;max-width:570px;margin:0}
+    .mini-quote{border-top:1px solid var(--line);padding-top:18px;margin-top:30px;font-size:12px;color:#aaa}
+    .mini-quote b{color:var(--accent);font-weight:500}
+    .side-stack{display:grid;gap:18px}
+    
+    /* Interactive demo */
+    .demo{background:#080808;padding-bottom:90px}
+    .demo-launch{border:1px solid #292929;background:linear-gradient(120deg,#101010,#0a0a0a);padding:26px 30px;display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:14px}
+    .demo-mini{font-size:9px;letter-spacing:.15em;color:var(--accent)}
+    .demo-launch h3{font-size:clamp(30px,4vw,54px);line-height:.92;letter-spacing:-.06em;margin:11px 0 0}
+    .demo-controls{display:flex;gap:8px;align-items:center}
+    .demo-arrow{width:46px;height:46px;border:1px solid #3a3a3a;background:#0c0c0c;color:#ddd;border-radius:50%;cursor:pointer}
+    .demo-arrow:hover{border-color:var(--accent);color:var(--accent)}
+    .demo-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:5px 2px 18px;overscroll-behavior-x:contain;touch-action:pan-y;cursor:grab}
+    .demo-rail::-webkit-scrollbar{display:none}
+    .demo-rail.dragging{cursor:grabbing}
+    .tour-card{flex:0 0 min(340px,82vw);min-height:445px;scroll-snap-align:center;border:1px solid #292929;background:#0b0b0b;padding:20px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+    .tour-card:hover{border-color:#444;transform:translateY(-3px)}
+    .tour-card.active-card{border-color:#56641f}
+    .tour-top{display:flex;justify-content:space-between;color:#555;font:9px NDot57,monospace;letter-spacing:.12em}
+    .tour-top span:last-child{color:var(--accent)}
+    .fake-video{height:185px;border:1px solid #292929;background:radial-gradient(circle at 48% 45%,#262626 0 4%,#151515 5% 28%,#101010 29%);margin:24px 0 20px;position:relative;display:grid;place-items:center;overflow:hidden}
+    .fake-video:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(217,255,74,.12) 50%,transparent 65%);animation:scan 3s infinite}
+    .play{width:48px;height:48px;border:1px solid #555;border-radius:50%;display:grid;place-items:center;color:var(--accent);z-index:1}
+    .fake-video>span{position:absolute;bottom:8px;right:10px;color:#555;font:8px NDot57,monospace}
+    .word-cloud{height:185px;border:1px solid #292929;margin:24px 0 20px;padding:25px 18px;font:17px/2 NDot57,monospace;color:#555}
+    .word-cloud b{color:#aaa}.word-cloud em{color:var(--accent);font-style:normal}.word-cloud strong{color:#eee}.word-cloud i{color:#888;font-style:normal}
+    .story-stack{margin:24px 0 20px;display:grid;gap:7px}
+    .story-stack div{border:1px solid #292929;padding:13px;display:flex;justify-content:space-between;align-items:center}
+    .story-stack b{font:10px NDot57,monospace;color:#ddd}.story-stack strong{font:11px NDot57,monospace;color:var(--accent)}.story-stack .muted{opacity:.38}
+    .mini-timeline{height:82px;border:1px solid #292929;margin:24px 0 13px;display:flex;gap:3px;padding:12px;align-items:center}
+    .mini-timeline i,.mini-timeline b{height:30px;flex:1;background:#282828}.mini-timeline b{background:var(--accent);flex:1.5}
+    .edit-tags{display:flex;flex-wrap:wrap;gap:6px}.edit-tags span{border:1px solid #343434;padding:6px 8px;color:#777;font:8px NDot57,monospace}.edit-tags span:first-child{border-color:var(--accent);color:var(--accent)}
+    .big-timeline{height:125px;border:1px solid #292929;margin:24px 0 20px;padding:20px 12px;display:flex;gap:4px;align-items:center;position:relative}
+    .big-timeline span,.big-timeline b{height:34px;flex:1;background:#222}.big-timeline b{background:var(--accent);flex:1.8}
+    .tl-play{position:absolute!important;left:12%;top:0;bottom:0;width:1px!important;height:auto!important;background:var(--accent)!important;box-shadow:0 0 12px var(--accent);animation:playhead 3s linear infinite}
+    .output-pair{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.output-pair div{border:1px solid #292929;padding:14px;min-height:75px}.output-pair b{display:block;font-size:27px;letter-spacing:-.06em}.output-pair small{color:#555;font:8px NDot57,monospace}
+    .tour-card h3{font-size:24px;letter-spacing:-.05em;margin:0 0 7px}.tour-card p{font-size:12px;color:#777;margin:0;max-width:285px}
+    .rail-note{text-align:center;color:#444;font-size:9px;letter-spacing:.1em;padding:4px}
+    
+    /* What the visitor needs to know — not the internal machinery */
+    .outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+    .outcome{background:var(--panel);padding:28px;min-height:230px}
+    .outcome .big{font:42px NDot57,monospace;color:var(--accent)}
+    .outcome h3{font-size:20px;letter-spacing:-.04em;margin:30px 0 8px}
+    .outcome p{font-size:12px;color:#777;margin:0;max-width:300px}
+    .editor-line{margin-top:18px;border:1px solid var(--line);background:#0b0b0b;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .editor-line strong{font-size:clamp(20px,3vw,34px);letter-spacing:-.04em}
+    .editor-line span{color:#777;font-size:12px;max-width:360px}
+    
+    .build{padding:120px 0}
     .cta-inner{border:1px solid #303030;padding:55px;display:flex;justify-content:space-between;gap:40px;align-items:end;background:linear-gradient(135deg,#101010,#080808)}
-    .cta h2{max-width:700px}
+    .cta-inner h2{max-width:720px}
     footer{padding:28px 0;color:#666;font-size:11px}
     footer .wrap{display:flex;justify-content:space-between;gap:20px}
-
-    .demo{background:#080808}
-    .demo-launch-card{border:1px solid #292929;background:#0b0b0b;padding:28px 30px;display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:18px}
-    .demo-mini{font-size:9px;letter-spacing:.15em;color:var(--accent)}.demo-launch-card h3{font-size:clamp(30px,4vw,54px);line-height:.92;letter-spacing:-.06em;margin:12px 0 0}
-    .demo-launch{background:var(--accent);color:#070707;border:0;border-radius:999px;padding:14px 18px;font:700 11px "NType82",sans-serif;white-space:nowrap;cursor:pointer}.demo-launch span{font-size:15px;margin-left:7px}
-    .demo-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 18px;cursor:grab;overscroll-behavior-x:contain}.demo-rail::-webkit-scrollbar{display:none}.demo-rail.dragging{cursor:grabbing}
-    .tour-card{flex:0 0 min(330px,82vw);min-height:430px;scroll-snap-align:center;border:1px solid #292929;background:#0b0b0b;padding:20px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}.tour-card:hover{border-color:#444;transform:translateY(-3px)}.tour-card.active-card{border-color:#48521e}
-    .tour-top{display:flex;justify-content:space-between;color:#555;font:9px "NDot57",monospace;letter-spacing:.12em}.tour-top span:last-child{color:var(--accent)}
-    .fake-video{height:180px;border:1px solid #292929;background:#101010;margin:24px 0 20px;position:relative;display:grid;place-items:center;overflow:hidden}.fake-video:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(217,255,74,.1) 50%,transparent 65%);animation:tourScan 3s infinite}.fake-video .play{width:46px;height:46px;border:1px solid #555;border-radius:50%;display:grid;place-items:center;color:var(--accent);z-index:1}.fake-video>span{position:absolute;bottom:8px;right:10px;color:#555;font:8px "NDot57",monospace}
-    .word-cloud{height:180px;border:1px solid #292929;margin:24px 0 20px;padding:25px 18px;font:17px/2 "NDot57",monospace;color:#555}.word-cloud b{color:#aaa}.word-cloud em{color:var(--accent);font-style:normal}.word-cloud strong{color:#eee}.word-cloud i{color:#888;font-style:normal}
-    .story-stack{margin:24px 0 20px;display:grid;gap:7px}.story-stack div{border:1px solid #292929;padding:13px;display:flex;justify-content:space-between;align-items:center}.story-stack b{font:10px "NDot57",monospace;color:#ddd}.story-stack strong{font:11px "NDot57",monospace;color:var(--accent)}.story-stack .muted{opacity:.38}
-    .mini-timeline{height:82px;border:1px solid #292929;margin:24px 0 13px;display:flex;gap:3px;padding:12px;align-items:center}.mini-timeline i,.mini-timeline b{height:30px;flex:1;background:#282828}.mini-timeline b{background:var(--accent);flex:1.5}.edit-tags{display:flex;flex-wrap:wrap;gap:6px}.edit-tags span{border:1px solid #343434;padding:6px 8px;color:#777;font:8px "NDot57",monospace}.edit-tags span:first-child{border-color:var(--accent);color:var(--accent)}
-    .big-timeline{height:125px;border:1px solid #292929;margin:24px 0 20px;padding:20px 12px;display:flex;gap:4px;align-items:center;position:relative}.big-timeline span,.big-timeline b{height:34px;flex:1;background:#222}.big-timeline b{background:var(--accent);flex:1.8}.tl-play{position:absolute!important;left:15%;top:0;bottom:0;width:1px!important;height:auto!important;background:var(--accent)!important;box-shadow:0 0 12px var(--accent);animation:tlPlay 3s linear infinite}
-    .output-pair{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.output-pair div{border:1px solid #292929;padding:14px;min-height:75px}.output-pair b{display:block;font-size:27px;letter-spacing:-.06em}.output-pair small{color:#555;font:8px "NDot57",monospace}
-    .tour-card h3{font-size:24px;letter-spacing:-.05em;margin:0 0 7px}.tour-card p{font-size:12px;color:#777;margin:0;max-width:270px}.swipe-hint{position:absolute;right:20px;bottom:18px;color:#555;font:9px "NDot57",monospace}.rail-note{text-align:center;color:#444;font-size:9px;letter-spacing:.1em;padding:4px}
-    @keyframes tourScan{0%,20%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}@keyframes tlPlay{from{left:8%}to{left:92%}}
-    @media(max-width:650px){.demo-launch-card{display:block;padding:24px}.demo-launch{margin-top:20px}.demo-rail{margin-right:-14px;margin-left:-14px;padding-left:14px;padding-right:14px}.tour-card{flex-basis:calc(100vw - 56px);min-height:405px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+    
+    @keyframes scan{0%,20%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
+    @keyframes playhead{from{left:8%}to{left:92%}}
+    
+    @media(max-width:850px){
+      .links{display:none}.menu-btn{display:block}
+      .nav-cta{display:none}
+      .mobile-menu{position:absolute;top:68px;left:0;right:0;background:rgba(7,7,7,.97);border-bottom:1px solid #242424;padding:10px 20px 16px}
+      .mobile-menu.open{display:grid}
+      .mobile-menu a{padding:13px 0;border-bottom:1px solid #202020;font-size:13px}
+      .mobile-menu a:last-child{border:0;color:var(--accent)}
+      .hero{padding-top:130px;min-height:auto}
+      .hero-copy{grid-template-columns:1fr;gap:28px}
+      .hero-note{max-width:520px}
+      .product-grid{grid-template-columns:1fr}
+      .product-card.large{min-height:350px}
+      .section-head{grid-template-columns:1fr;gap:12px}
+      .section-head .num{margin-bottom:2px}
+      .outcome-grid{grid-template-columns:1fr}
+      .outcome{min-height:190px}
+      .cta-inner{display:block;padding:34px 25px}
+      .cta-inner .buttons{margin-top:28px}
+    }
+    @media(max-width:600px){
+      .wrap{width:min(calc(100% - 28px),var(--max))}
+      nav{height:60px}.mobile-menu{top:60px;padding-left:14px;padding-right:14px}
+      .brand{font-size:20px}.logo{width:25px;height:25px}
+      h1{font-size:clamp(49px,16vw,78px);margin-bottom:26px}
+      .hero{padding:112px 0 64px}
+      .lead{font-size:19px}
+      .buttons{display:grid;grid-template-columns:1fr;margin-top:28px}
+      .button{width:100%}
+      section{padding:76px 0}
+      h2{font-size:clamp(35px,11vw,53px)}
+      .sub{font-size:14px}
+      .product-card{padding:24px}.product-card.large{min-height:320px}.product-card h3{margin-top:35px}
+      .demo{padding-bottom:70px}
+      .demo-launch{display:block;padding:22px 20px}
+      .demo-controls{margin-top:20px;justify-content:flex-end}
+      .demo-arrow{width:42px;height:42px}
+      .demo-rail{margin-right:-7px;margin-left:-7px;padding-left:7px;padding-right:7px}
+      .tour-card{flex-basis:calc(100vw - 44px);min-height:420px}
+      .fake-video,.word-cloud{height:170px}
+      .editor-line{display:block;padding:22px}.editor-line span{display:block;margin-top:10px}
+      .build{padding:80px 0}
+      footer .wrap{display:block}.footer-right{margin-top:8px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+    }
   </style>
 </head>
 <body>
-<header><div class="wrap"><nav>
-  <a class="brand" href="#" aria-label="SelekyT home">
-    <span class="logo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
-    <span>SelekyT</span>
-  </a>
-  <div class="links"><a href="#product">Product</a><a href="#demo">Demo</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a><a class="social" href="https://x.com/SeleKyT" target="_blank" rel="noopener">X ↗</a></div>
-  <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
-</nav></div></header>
-<main>
-<section class="hero"><div class="wrap">
-  <div class="eyebrow mono">AI-NATIVE EDITORIAL ENGINE / 01</div>
-  <h1>Long-form video.<br><span>Edited by intelligence.</span></h1>
-  <div class="hero-copy"><div>
-    <p class="lead">SelekyT turns long-form video into structured, editable, publishable stories — doing the first-pass editorial work while keeping humans in control.</p>
-    <div class="buttons"><a class="button primary" href="#demo">See it in action ↓</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow the build on X ↗</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
-  </div><p class="hero-note mono">Built local-first.<br>Designed for creators, editors, newsrooms and media teams.<br><br>Early product. Real engineering. No invented traction.</p></div>
-</div></section>
-<section id="product"><div class="wrap"><div class="section-head"><div class="num mono">02 / THE PRODUCT</div><div><h2>The first editorial pass should not take all day.</h2><p class="sub">A long recording contains stories, dead air, repetition, context and moments worth publishing. SelekyT is being built to find and shape those moments before the human editor takes over.</p></div></div>
-<div class="showcase"><div class="card large"><div class="tag mono">EDITORIAL INTELLIGENCE</div><h3>From raw footage to decisions.</h3><p>SelekyT analyzes a long-form source, builds a structured representation of what was said, groups story units, applies editorial reasoning and produces concrete edit decisions.</p><div class="terminal mono"><div><span class="green">INPUT</span> long-form video</div><div>↓ transcription</div><div>↓ story-unit detection</div><div>↓ editorial reasoning / ranking</div><div>↓ context &amp; truth checks</div><div>↓ filler / dead-air analysis</div><div>↓ reframing + captions</div><div><span class="green">OUTPUT</span> editable editorial package</div></div></div>
-<div><div class="card"><div class="tag mono">HUMAN CONTROL</div><h3>AI proposes.<br>You decide.</h3><p>The goal is not to replace editors. It is to remove repetitive first-pass work and preserve professional editorial control.</p></div><div class="card" style="margin-top:18px"><div class="tag mono">FORMAT</div><h3>One source.<br>Many outputs.</h3><p>Selections, transcripts, captions, 16:9 and 9:16 renders, and editable timeline representations can all come from the same editorial analysis.</p></div></div></div></div></section>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#" aria-label="SelekyT home">
+        <span class="logo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+        <span>SelekyT</span>
+      </a>
+      <div class="links" aria-label="Primary navigation">
+        <a href="#product">Product</a><a href="#demo">Demo</a><a href="#outcome">Why it matters</a><a href="#build">Build in public</a><a class="social" href="https://x.com/SeleKyT" target="_blank" rel="noopener">X ↗</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">MENU</button>
+      <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#product">Product</a><a href="#demo">Demo</a><a href="#outcome">Why it matters</a><a href="#build">Build in public</a><a href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a><a href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
+    </div>
+  </div>
+</header>
 
-<section id="demo" class="demo"><div class="wrap"><div class="section-head"><div class="num mono">02.5 / SEE IT</div><div><h2>Watch the edit happen.</h2><p class="sub">Don't read a feature list. Swipe through a visual story of how SelekyT turns long-form video into an editable timeline.</p></div></div>
-<div class="demo-launch-card"><div><span class="demo-mini mono">INTERACTIVE PRODUCT TOUR</span><h3>From raw footage<br>to an editable story.</h3></div><button class="demo-launch" id="openDemo">TAP TO EXPLORE <span>→</span></button></div>
-<div class="demo-rail" id="demoRail">
-  <article class="tour-card"><div class="tour-top"><span>01 / INPUT</span><span>VIDEO</span></div><div class="fake-video"><div class="play">▶</div><div class="scan"></div><span>02:47:18</span></div><h3>Hours go in.</h3><p>One long recording becomes something the editorial engine can understand.</p><div class="swipe-hint">SWIPE →</div></article>
-  <article class="tour-card"><div class="tour-top"><span>02 / UNDERSTAND</span><span>TRANSCRIPT</span></div><div class="word-cloud"><b>the</b> story <em>started</em><br>with a <strong>simple</strong> question<br>and then <i>everything changed</i>.</div><h3>Words get structure.</h3><p>Speech becomes timed, searchable information.</p></article>
-  <article class="tour-card active-card"><div class="tour-top"><span>03 / REASON</span><span>STORIES</span></div><div class="story-stack"><div><b>THE ORIGIN</b><strong>94</strong></div><div><b>THE TURNING POINT</b><strong>88</strong></div><div class="muted"><b>REPETITION</b><strong>31</strong></div><div><b>THE PAYOFF</b><strong>91</strong></div></div><h3>Stories surface.</h3><p>The strongest moments rise to the top.</p></article>
-  <article class="tour-card"><div class="tour-top"><span>04 / EDIT</span><span>FIRST PASS</span></div><div class="mini-timeline"><i></i><b></b><i></i><b></b><i></i><b></b></div><div class="edit-tags"><span>KEEP</span><span>REMOVE FILLER</span><span>9:16</span><span>CAPTIONS</span></div><h3>AI makes the first pass.</h3><p>Repetition is cut. Framing and captions are prepared. The human stays in control.</p></article>
-  <article class="tour-card"><div class="tour-top"><span>05 / TIMELINE</span><span>EDITABLE</span></div><div class="big-timeline"><div class="tl-play"></div><span></span><b></b><span></span><b></b><span></span><b></b></div><h3>Decisions become a timeline.</h3><p>Not a black-box render. An editable editorial sequence.</p></article>
-  <article class="tour-card"><div class="tour-top"><span>06 / OUTPUT</span><span>READY</span></div><div class="output-pair"><div><b>16:9</b><small>MASTER</small></div><div><b>9:16</b><small>SHORT</small></div></div><div class="output-pair"><div><b>CC</b><small>CAPTIONS</small></div><div><b>EDL</b><small>TIMELINE</small></div></div><h3>One pass. Many outputs.</h3><p>Publish-ready formats without losing the editorial structure.</p></article>
-</div><div class="rail-note mono">DRAG / SWIPE THE CARDS · 01—06</div>
-</div></section>
-<div class="demo-modal" id="demoModal" aria-hidden="true"><div class="demo-app">
-<div class="demo-appbar"><span class="mono">SELEKYT / HOW IT WORKS</span><button class="demo-close" id="closeDemo" aria-label="Close">×</button></div>
-<div class="demo-body"><div class="demo-steps">
-<div class="demo-step active" data-step="0"><b>01</b><span>Raw video</span></div><div class="demo-step" data-step="1"><b>02</b><span>Transcribe</span></div><div class="demo-step" data-step="2"><b>03</b><span>Find stories</span></div><div class="demo-step" data-step="3"><b>04</b><span>Edit</span></div><div class="demo-step" data-step="4"><b>05</b><span>Timeline</span></div><div class="demo-step" data-step="5"><b>06</b><span>Publish</span></div>
-</div>
-<div class="demo-main" id="demoMain">
-<div class="demo-panel active"><div class="panel-kicker">01 / INGEST</div><div class="panel-title">Start with hours.<br>Not a blank timeline.</div><p class="panel-copy">SelekyT takes the long-form source and turns the moving image into something the editorial system can reason about.</p><div class="video-frame"><div class="video-sub">“So here's what actually happened…”</div><div class="video-time">00:47:18</div></div></div>
-<div class="demo-panel"><div class="panel-kicker">02 / UNDERSTAND</div><div class="panel-title">Hear every word.<br>Structure the chaos.</div><p class="panel-copy">Speech becomes searchable, timed information — the foundation for finding what matters.</p><div class="transcript-box">We started with a simple question about <span class="word">how creators spend their time.</span><br>Then the conversation changed when <span class="hit">the first prototype actually worked.</span><br>That was the moment everything became interesting.</div></div>
-<div class="demo-panel"><div class="panel-kicker">03 / REASON</div><div class="panel-title">Not every moment<br>deserves the cut.</div><p class="panel-copy">Story units are grouped and ranked so the editor can see the strongest narrative candidates first.</p><div class="story-cards"><div class="story-row selected"><span class="story-dot"></span><strong>01 · The origin story</strong><span class="story-score">94</span></div><div class="story-row"><span class="story-dot"></span><strong>02 · The turning point</strong><span class="story-score">88</span></div><div class="story-row"><span class="story-dot"></span><strong>03 · Repeated explanation</strong><span class="story-score">31</span></div><div class="story-row"><span class="story-dot"></span><strong>04 · The payoff</strong><span class="story-score">91</span></div></div></div>
-<div class="demo-panel"><div class="panel-kicker">04 / EDIT</div><div class="panel-title">AI does the<br>first pass.</div><p class="panel-copy">Repetition gets marked. Filler gets removed. Framing and captions are prepared. The editor stays in control.</p><div class="edit-ui"><div class="edit-toolbar"><span class="edit-chip on">KEEP STORY</span><span class="edit-chip on">REMOVE FILLER</span><span class="edit-chip">REFRAME 9:16</span><span class="edit-chip">CAPTIONS</span></div><div class="timeline"><span class="track cut"></span><span class="track keep"></span><span class="track cut"></span><span class="track keep"></span><span class="track cut"></span><span class="track keep"></span></div><div class="timeline-label">SOURCE TIMELINE · SELECTED MOMENTS</div></div></div>
-<div class="demo-panel"><div class="panel-kicker">05 / DELIVER</div><div class="panel-title">The timeline<br>is the product.</div><p class="panel-copy">The decisions become an editable sequence rather than a flattened black box.</p><div class="edit-ui"><div class="timeline"><span class="track cut"></span><span class="track keep"></span><span class="track keep"></span><span class="track cut"></span><span class="track keep"></span><span class="track keep"></span></div><div class="timeline-label">EDITABLE STORY SEQUENCE · HUMAN REVIEW</div></div></div>
-<div class="demo-panel"><div class="panel-kicker">06 / OUTPUT</div><div class="panel-title">One editorial pass.<br>Multiple destinations.</div><p class="panel-copy">The same structured decisions can feed social formats and professional editing workflows.</p><div class="output-ui"><div class="output-tile"><span class="ok">READY</span><div class="ratio">16:9</div><p>MASTER VIDEO</p></div><div class="output-tile"><span class="ok">READY</span><div class="ratio">9:16</div><p>SHORT-FORM CUT</p></div><div class="output-tile"><span class="ok">READY</span><div class="ratio">CC</div><p>CAPTIONS</p></div><div class="output-tile"><span class="ok">READY</span><div class="ratio">EDL</div><p>EDITABLE TIMELINE</p></div></div></div>
-<div class="demo-nav"><button id="demoPrev">← BACK</button><div class="demo-dots"><i class="active"></i><i></i><i></i><i></i><i></i><i></i></div><button id="demoNext">NEXT →</button></div>
-</div></div><div class="demo-hint">SWIPE / DRAG / TAP · 01—06</div></div></div>
-<section id="pipeline"><div class="wrap"><div class="section-head"><div class="num mono">03 / PIPELINE</div><div><h2>A media workflow, rebuilt around structured decisions.</h2></div></div><div class="flow">
-<div class="step"><span class="n mono">01</span><b>Source</b><p>Long-form video from a supported source.</p></div><div class="step"><span class="n mono">02</span><b>Understand</b><p>Transcription and structured story representation.</p></div><div class="step"><span class="n mono">03</span><b>Reason</b><p>Story grouping, ranking, context and editorial checks.</p></div><div class="step"><span class="n mono">04</span><b>Edit</b><p>Filler removal, selections, reframing and captions.</p></div><div class="step"><span class="n mono">05</span><b>Publish</b><p>Social-ready outputs and editable timelines.</p></div>
-</div></div></section>
-<section id="engineering"><div class="wrap"><div class="section-head"><div class="num mono">04 / ENGINEERING</div><div><h2>Built as an editorial system, not a demo wrapper.</h2><p class="sub">The project combines a Python editorial layer, a Rust mechanical core, deterministic validation and a web/desktop surface. The architecture is designed so AI decisions can become measurable, testable parts of a real editing workflow.</p></div></div>
-<div class="outputs"><div class="output"><strong>Python editorial layer</strong><p>Transcription, story grouping, editorial logic, context safeguards and orchestration.</p></div><div class="output"><strong>Rust core</strong><p>Mechanical media operations and performance-sensitive processing.</p></div><div class="output"><strong>Editable timelines</strong><p>FCPXML and CMX 3600 EDL generation with structural validation.</p></div><div class="output"><strong>Desktop direction</strong><p>A local-first Windows application is being productized around the same engine.</p></div></div>
-<div class="proof" style="margin-top:18px"><div class="card"><div class="tag mono">WHAT IS REAL</div><h3>Working engine</h3><p>Local-file editorial processing, transcription, story analysis, captions, reframing and render pipelines have been implemented and tested.</p></div><div class="card"><div class="tag mono">WHAT IS NEXT</div><h3>Real editors</h3><p>The next proof is not another feature. It is editor usage, measured time saved, workflow fit and eventually repeatable customer value.</p></div><div class="card"><div class="tag mono">OPEN BUILD</div><h3>Follow the work</h3><p>The repository documents the engineering, tests, limitations and remaining validation instead of hiding unfinished parts behind marketing language.</p></div></div>
-<p class="truth mono">STATUS: EARLY PRODUCT · ZERO CLAIMS OF CUSTOMER TRACTION · VALIDATION IN PROGRESS</p></div></section>
-<section id="build" class="cta"><div class="wrap"><div class="cta-inner"><div><div class="eyebrow mono">05 / BUILD IN PUBLIC</div><h2>Watch an editorial engine become a product.</h2><p class="sub">See the product, follow the build, and watch the editorial engine take shape in public.</p><p class="sub">Follow the repository for experiments, engineering progress, validation and the decisions behind SelekyT.</p></div><div class="buttons"><a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore SelekyT ↗</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a></div></div></div></section>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow mono">AI-NATIVE EDITORIAL ENGINE / 01</div>
+      <h1>Long-form video.<br><span>The first pass, automated.</span></h1>
+      <div class="hero-copy">
+        <div>
+          <p class="lead">SelekyT turns long-form video into an editable editorial starting point — finding stories, shaping the first cut and handing the human editor something they can actually work with.</p>
+          <div class="buttons">
+            <a class="button primary" href="#demo">See the edit happen ↓</a>
+            <a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow the build on X ↗</a>
+            <a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a>
+          </div>
+        </div>
+        <p class="hero-note mono">BUILT IN PUBLIC<br><br>Early product. Real engineering.<br>No invented traction.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="product">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num mono">02 / THE IDEA</div>
+        <div><h2>Editors should start with a story — not a mountain of footage.</h2><p class="sub">Long recordings contain the useful moment somewhere inside hours of context, repetition and dead air. SelekyT is being built to do the painful first pass before the editor takes over.</p></div>
+      </div>
+      <div class="product-grid">
+        <div class="product-card large">
+          <div><div class="tag mono">THE PRODUCT</div><h3>Raw footage → editorial decisions → editable timeline.</h3><p>Instead of stopping at a transcript or a flattened auto-edit, SelekyT is designed around the thing editors actually need: a structured starting point they can review, change and continue editing.</p></div>
+          <div class="mini-quote mono"><b>AI PROPOSES.</b> THE EDITOR DECIDES.</div>
+        </div>
+        <div class="side-stack">
+          <div class="product-card"><div class="tag mono">FOR CREATORS</div><h3>Find the moments.</h3><p>Surface stories and publishable moments without scrubbing through everything manually.</p></div>
+          <div class="product-card"><div class="tag mono">FOR EDITORS</div><h3>Keep the control.</h3><p>Start from an editorial sequence instead of surrendering the final cut to a black box.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num mono">03 / INTERACTIVE</div>
+        <div><h2>Watch the edit happen.</h2><p class="sub">Don't read a feature list. Swipe, drag or use the arrows. This is the product idea in six moves.</p></div>
+      </div>
+      <div class="demo-launch">
+        <div><span class="demo-mini mono">PRODUCT TOUR · 01—06</span><h3>From raw footage<br>to an editable story.</h3></div>
+        <div class="demo-controls" aria-label="Demo controls">
+          <button class="demo-arrow" id="prev" aria-label="Previous demo card">←</button>
+          <button class="demo-arrow" id="next" aria-label="Next demo card">→</button>
+        </div>
+      </div>
+      <div class="demo-rail" id="demoRail" tabindex="0" aria-label="Interactive SelekyT product tour">
+        <article class="tour-card" data-index="0">
+          <div class="tour-top"><span>01 / INPUT</span><span>VIDEO</span></div>
+          <div class="fake-video"><div class="play">▶</div><span>02:47:18</span></div>
+          <h3>Hours go in.</h3><p>One long recording becomes something the editorial engine can work with.</p>
+        </article>
+        <article class="tour-card" data-index="1">
+          <div class="tour-top"><span>02 / UNDERSTAND</span><span>TRANSCRIPT</span></div>
+          <div class="word-cloud"><b>the</b> story <em>started</em><br>with a <strong>simple</strong> question<br>and then <i>everything changed</i>.</div>
+          <h3>Words get structure.</h3><p>Speech becomes timed, searchable information.</p>
+        </article>
+        <article class="tour-card active-card" data-index="2">
+          <div class="tour-top"><span>03 / REASON</span><span>STORIES</span></div>
+          <div class="story-stack"><div><b>THE ORIGIN</b><strong>94</strong></div><div><b>THE TURNING POINT</b><strong>88</strong></div><div class="muted"><b>REPETITION</b><strong>31</strong></div><div><b>THE PAYOFF</b><strong>91</strong></div></div>
+          <h3>Stories surface.</h3><p>The strongest moments rise to the top.</p>
+        </article>
+        <article class="tour-card" data-index="3">
+          <div class="tour-top"><span>04 / EDIT</span><span>FIRST PASS</span></div>
+          <div class="mini-timeline"><i></i><b></b><i></i><b></b><i></i><b></b></div>
+          <div class="edit-tags"><span>KEEP</span><span>REMOVE FILLER</span><span>9:16</span><span>CAPTIONS</span></div>
+          <h3>AI makes the first pass.</h3><p>Repetition is cut, framing and captions are prepared, and the human stays in control.</p>
+        </article>
+        <article class="tour-card" data-index="4">
+          <div class="tour-top"><span>05 / TIMELINE</span><span>EDITABLE</span></div>
+          <div class="big-timeline"><div class="tl-play"></div><span></span><b></b><span></span><b></b><span></span><b></b></div>
+          <h3>Decisions become a timeline.</h3><p>Not a black-box render. An editable editorial sequence.</p>
+        </article>
+        <article class="tour-card" data-index="5">
+          <div class="tour-top"><span>06 / OUTPUT</span><span>READY</span></div>
+          <div class="output-pair"><div><b>16:9</b><small>MASTER</small></div><div><b>9:16</b><small>SHORT</small></div></div>
+          <div class="output-pair"><div><b>CC</b><small>CAPTIONS</small></div><div><b>EDL</b><small>TIMELINE</small></div></div>
+          <h3>One pass. Many outputs.</h3><p>Structured decisions can feed multiple formats and editing workflows.</p>
+        </article>
+      </div>
+      <div class="rail-note mono" id="demoStatus">03 / 06 · STORIES · DRAG OR SWIPE</div>
+    </div>
+  </section>
+
+  <section id="outcome">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num mono">04 / THE OUTCOME</div>
+        <div><h2>Less scrubbing. More editing.</h2><p class="sub">The public story is simple. SelekyT handles the repetitive first pass so a human can spend more time on judgment, taste and the final cut.</p></div>
+      </div>
+      <div class="outcome-grid">
+        <div class="outcome"><div class="big mono">01</div><h3>FIND</h3><p>Surface story units and moments worth looking at instead of starting from zero.</p></div>
+        <div class="outcome"><div class="big mono">02</div><h3>SHAPE</h3><p>Turn those decisions into a first-pass edit with selections, captions, framing and structure.</p></div>
+        <div class="outcome"><div class="big mono">03</div><h3>HAND OFF</h3><p>Give the editor an editable starting point — not a final answer they cannot change.</p></div>
+      </div>
+      <div class="editor-line"><strong>AI proposes. You decide.</strong><span>The goal is an editor with a head start, not an editor replaced by a button.</span></div>
+    </div>
+  </section>
+
+  <section id="build" class="build">
+    <div class="wrap">
+      <div class="cta-inner">
+        <div>
+          <div class="eyebrow mono">05 / BUILD IN PUBLIC</div>
+          <h2>Watch an editorial engine become a product.</h2>
+          <p class="sub">The repository is public. The build is public. The validation is still happening.</p>
+        </div>
+        <div class="buttons">
+          <a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore SelekyT ↗</a>
+          <a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="wrap"><span>SELEKYT © 2026</span><span class="mono">desukab.github.io / built with GitHub Pages</span></div></footer>
+
+<footer>
+  <div class="wrap">
+    <span>SELEKYT © 2026</span>
+    <span class="footer-right mono">desukab.github.io / built with GitHub Pages</span>
+  </div>
+</footer>
 
 <script>
 (function(){
- const rail=document.getElementById('demoRail'), cards=[...rail.querySelectorAll('.tour-card')];
- let down=false,start=0,scroll=0;
- rail.addEventListener('pointerdown',e=>{down=true;start=e.clientX;scroll=rail.scrollLeft;rail.classList.add('dragging');rail.setPointerCapture(e.pointerId)});
- rail.addEventListener('pointermove',e=>{if(down)rail.scrollLeft=scroll-(e.clientX-start)});
- rail.addEventListener('pointerup',()=>{down=false;rail.classList.remove('dragging')});
- rail.addEventListener('pointercancel',()=>{down=false;rail.classList.remove('dragging')});
- const btn=document.getElementById('openDemo'); if(btn)btn.addEventListener('click',()=>{cards[0].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})});
- const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('active-card',e.isIntersecting)),{root:rail,threshold:.65});
- cards.forEach(c=>io.observe(c));
+  const rail=document.getElementById('demoRail');
+  const cards=[...document.querySelectorAll('.tour-card')];
+  const status=document.getElementById('demoStatus');
+  const prev=document.getElementById('prev');
+  const next=document.getElementById('next');
+  let active=2, down=false, startX=0, startScroll=0;
+
+  function setActive(i,behavior='smooth'){
+    active=Math.max(0,Math.min(cards.length-1,i));
+    cards[active].scrollIntoView({behavior,block:'nearest',inline:'center'});
+    cards.forEach((c,n)=>c.classList.toggle('active-card',n===active));
+    const label=cards[active].querySelector('.tour-top span:first-child').textContent;
+    const name=cards[active].querySelector('.tour-top span:last-child').textContent;
+    status.textContent=(String(active+1).padStart(2,'0'))+' / 06 · '+name+' · SWIPE / DRAG';
+  }
+
+  prev.addEventListener('click',()=>setActive(active-1));
+  next.addEventListener('click',()=>setActive(active+1));
+
+  const io=new IntersectionObserver(entries=>{
+    let best=null;
+    entries.forEach(e=>{if(e.isIntersecting && (!best || e.intersectionRatio>best.intersectionRatio))best=e});
+    if(best){active=Number(best.target.dataset.index);cards.forEach((c,n)=>c.classList.toggle('active-card',n===active));const name=cards[active].querySelector('.tour-top span:last-child').textContent;status.textContent=(String(active+1).padStart(2,'0'))+' / 06 · '+name+' · SWIPE / DRAG';}
+  },{root:rail,threshold:[.55,.75,.9]});
+  cards.forEach(c=>io.observe(c));
+
+  rail.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse' && e.button!==0)return;
+    down=true;startX=e.clientX;startScroll=rail.scrollLeft;rail.classList.add('dragging');rail.setPointerCapture(e.pointerId);
+  });
+  rail.addEventListener('pointermove',e=>{if(down)rail.scrollLeft=startScroll-(e.clientX-startX)});
+  function stop(){down=false;rail.classList.remove('dragging')}
+  rail.addEventListener('pointerup',stop);rail.addEventListener('pointercancel',stop);
+  rail.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();setActive(active+1)}
+    if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1)}
+  });
+
+  const menuBtn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click',()=>{
+    const open=menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',String(open));
+    menuBtn.textContent=open?'CLOSE':'MENU';
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    menu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='MENU';
+  }));
 })();
 </script>
 </body>
