@@ -15,14 +15,17 @@
     :root{--bg:#070707;--panel:#0d0d0d;--line:#242424;--text:#f4f4f0;--muted:#999;--soft:#c9c9c2;--accent:#d9ff4a;--max:1180px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Nothing","NDot","NType","Noto Sans",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
     a{color:inherit;text-decoration:none}
     .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
-    .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+    .mono{font-family:"Nothing","NDot","NType","Noto Sans Mono","SFMono-Regular",Consolas,monospace}
     header{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(7,7,7,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
     nav{height:68px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800;letter-spacing:-.04em;font-size:20px}
-    .brand i{display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%;margin-left:5px;vertical-align:4px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.04em;font-size:20px}
+    .logo{width:25px;height:25px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px}
+    .logo span{border:1.5px solid var(--text);display:block}
+    .logo span:nth-child(2),.logo span:nth-child(4),.logo span:nth-child(5),.logo span:nth-child(8){border-color:var(--accent)}
+    .logo span:nth-child(5){background:var(--accent)}
     .links{display:flex;gap:26px;color:#aaa;font-size:13px}
     .links a:hover{color:#fff}
     .nav-cta{border:1px solid #383838;border-radius:999px;padding:9px 15px;font-size:12px}
@@ -71,152 +74,41 @@
     .cta h2{max-width:700px}
     footer{padding:28px 0;color:#666;font-size:11px}
     footer .wrap{display:flex;justify-content:space-between;gap:20px}
-    @media(max-width:800px){
-      .links{display:none}.hero-copy,.showcase,.section-head{grid-template-columns:1fr}.hero{min-height:auto}
-      .hero-note{margin-top:10px}.flow{grid-template-columns:1fr}.step{min-height:130px;border-right:0;border-bottom:1px solid var(--line)}
-      .step:last-child{border-bottom:0}.step b{margin:35px 0 7px}.outputs,.proof{grid-template-columns:1fr 1fr}
-      .cta-inner{padding:32px;display:block}.cta .button{margin-top:28px}.section-head{gap:15px}
-    }
+    @media(max-width:800px){.links{display:none}.hero-copy,.showcase,.section-head{grid-template-columns:1fr}.hero{min-height:auto}.hero-note{margin-top:10px}.flow{grid-template-columns:1fr}.step{min-height:130px;border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.step b{margin:35px 0 7px}.outputs,.proof{grid-template-columns:1fr 1fr}.cta-inner{padding:32px;display:block}.cta .button{margin-top:28px}.section-head{gap:15px}}
     @media(max-width:520px){.wrap{width:min(calc(100% - 28px),var(--max))}h1{font-size:55px}.outputs,.proof{grid-template-columns:1fr}.card{padding:23px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
   </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="#">SelekyT<i></i></a>
-      <div class="links">
-        <a href="#product">Product</a>
-        <a href="#pipeline">Pipeline</a>
-        <a href="#engineering">Engineering</a>
-        <a href="#build">Build in public</a>
-      </div>
-      <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
-    </nav>
-  </div>
-</header>
-
+<header><div class="wrap"><nav>
+  <a class="brand" href="#" aria-label="SelekyT home">
+    <span class="logo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+    <span>SelekyT</span>
+  </a>
+  <div class="links"><a href="#product">Product</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a></div>
+  <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
+</nav></div></header>
 <main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="eyebrow mono">AI-NATIVE EDITORIAL ENGINE / 01</div>
-      <h1>Long-form video.<br><span>Edited by intelligence.</span></h1>
-      <div class="hero-copy">
-        <div>
-          <p class="lead">SelekyT turns long-form video into structured, editable, publishable stories — doing the first-pass editorial work while keeping humans in control.</p>
-          <div class="buttons">
-            <a class="button primary" href="#product">See how it works ↓</a>
-            <a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a>
-          </div>
-        </div>
-        <p class="hero-note mono">Built local-first.<br>Designed for creators, editors, newsrooms and media teams.<br><br>Early product. Real engineering. No invented traction.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="product">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="num mono">02 / THE PRODUCT</div>
-        <div>
-          <h2>The first editorial pass should not take all day.</h2>
-          <p class="sub">A long recording contains stories, dead air, repetition, context and moments worth publishing. SelekyT is being built to find and shape those moments before the human editor takes over.</p>
-        </div>
-      </div>
-      <div class="showcase">
-        <div class="card large">
-          <div class="tag mono">EDITORIAL INTELLIGENCE</div>
-          <h3>From raw footage to decisions.</h3>
-          <p>SelekyT analyzes a long-form source, builds a structured representation of what was said, groups story units, applies editorial reasoning and produces concrete edit decisions.</p>
-          <div class="terminal mono">
-            <div><span class="green">INPUT</span>  long-form video</div>
-            <div>↓ transcription</div>
-            <div>↓ story-unit detection</div>
-            <div>↓ editorial reasoning / ranking</div>
-            <div>↓ context &amp; truth checks</div>
-            <div>↓ filler / dead-air analysis</div>
-            <div>↓ reframing + captions</div>
-            <div><span class="green">OUTPUT</span> editable editorial package</div>
-          </div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="tag mono">HUMAN CONTROL</div>
-            <h3>AI proposes.<br>You decide.</h3>
-            <p>The goal is not to replace editors. It is to remove repetitive first-pass work and preserve professional editorial control.</p>
-          </div>
-          <div class="card" style="margin-top:18px">
-            <div class="tag mono">FORMAT</div>
-            <h3>One source.<br>Many outputs.</h3>
-            <p>Selections, transcripts, captions, 16:9 and 9:16 renders, and editable timeline representations can all come from the same editorial analysis.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="pipeline">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="num mono">03 / PIPELINE</div>
-        <div>
-          <h2>A media workflow, rebuilt around structured decisions.</h2>
-        </div>
-      </div>
-      <div class="flow">
-        <div class="step"><span class="n mono">01</span><b>Source</b><p>Long-form video from a supported source.</p></div>
-        <div class="step"><span class="n mono">02</span><b>Understand</b><p>Transcription and structured story representation.</p></div>
-        <div class="step"><span class="n mono">03</span><b>Reason</b><p>Story grouping, ranking, context and editorial checks.</p></div>
-        <div class="step"><span class="n mono">04</span><b>Edit</b><p>Filler removal, selections, reframing and captions.</p></div>
-        <div class="step"><span class="n mono">05</span><b>Publish</b><p>Social-ready outputs and editable timelines.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="engineering">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="num mono">04 / ENGINEERING</div>
-        <div>
-          <h2>Built as an editorial system, not a demo wrapper.</h2>
-          <p class="sub">The project combines a Python editorial layer, a Rust mechanical core, deterministic validation and a web/desktop surface. The architecture is designed so AI decisions can become measurable, testable parts of a real editing workflow.</p>
-        </div>
-      </div>
-      <div class="outputs">
-        <div class="output"><strong>Python editorial layer</strong><p>Transcription, story grouping, editorial logic, context safeguards and orchestration.</p></div>
-        <div class="output"><strong>Rust core</strong><p>Mechanical media operations and performance-sensitive processing.</p></div>
-        <div class="output"><strong>Editable timelines</strong><p>FCPXML and CMX 3600 EDL generation with structural validation.</p></div>
-        <div class="output"><strong>Desktop direction</strong><p>A local-first Windows application is being productized around the same engine.</p></div>
-      </div>
-      <div class="proof" style="margin-top:18px">
-        <div class="card"><div class="tag mono">WHAT IS REAL</div><h3>Working engine</h3><p>Local-file editorial processing, transcription, story analysis, captions, reframing and render pipelines have been implemented and tested.</p></div>
-        <div class="card"><div class="tag mono">WHAT IS NEXT</div><h3>Real editors</h3><p>The next proof is not another feature. It is editor usage, measured time saved, workflow fit and eventually repeatable customer value.</p></div>
-        <div class="card"><div class="tag mono">OPEN BUILD</div><h3>Follow the work</h3><p>The repository documents the engineering, tests, limitations and remaining validation instead of hiding unfinished parts behind marketing language.</p></div>
-      </div>
-      <p class="truth mono">STATUS: EARLY PRODUCT · ZERO CLAIMS OF CUSTOMER TRACTION · VALIDATION IN PROGRESS</p>
-    </div>
-  </section>
-
-  <section id="build" class="cta">
-    <div class="wrap">
-      <div class="cta-inner">
-        <div>
-          <div class="eyebrow mono">05 / BUILD IN PUBLIC</div>
-          <h2>Watch an editorial engine become a product.</h2>
-          <p class="sub">Follow the repository for experiments, engineering progress, validation and the decisions behind SelekyT.</p>
-        </div>
-        <a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Open SelekyT on GitHub ↗</a>
-      </div>
-    </div>
-  </section>
+<section class="hero"><div class="wrap">
+  <div class="eyebrow mono">AI-NATIVE EDITORIAL ENGINE / 01</div>
+  <h1>Long-form video.<br><span>Edited by intelligence.</span></h1>
+  <div class="hero-copy"><div>
+    <p class="lead">SelekyT turns long-form video into structured, editable, publishable stories — doing the first-pass editorial work while keeping humans in control.</p>
+    <div class="buttons"><a class="button primary" href="#product">See how it works ↓</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
+  </div><p class="hero-note mono">Built local-first.<br>Designed for creators, editors, newsrooms and media teams.<br><br>Early product. Real engineering. No invented traction.</p></div>
+</div></section>
+<section id="product"><div class="wrap"><div class="section-head"><div class="num mono">02 / THE PRODUCT</div><div><h2>The first editorial pass should not take all day.</h2><p class="sub">A long recording contains stories, dead air, repetition, context and moments worth publishing. SelekyT is being built to find and shape those moments before the human editor takes over.</p></div></div>
+<div class="showcase"><div class="card large"><div class="tag mono">EDITORIAL INTELLIGENCE</div><h3>From raw footage to decisions.</h3><p>SelekyT analyzes a long-form source, builds a structured representation of what was said, groups story units, applies editorial reasoning and produces concrete edit decisions.</p><div class="terminal mono"><div><span class="green">INPUT</span> long-form video</div><div>↓ transcription</div><div>↓ story-unit detection</div><div>↓ editorial reasoning / ranking</div><div>↓ context &amp; truth checks</div><div>↓ filler / dead-air analysis</div><div>↓ reframing + captions</div><div><span class="green">OUTPUT</span> editable editorial package</div></div></div>
+<div><div class="card"><div class="tag mono">HUMAN CONTROL</div><h3>AI proposes.<br>You decide.</h3><p>The goal is not to replace editors. It is to remove repetitive first-pass work and preserve professional editorial control.</p></div><div class="card" style="margin-top:18px"><div class="tag mono">FORMAT</div><h3>One source.<br>Many outputs.</h3><p>Selections, transcripts, captions, 16:9 and 9:16 renders, and editable timeline representations can all come from the same editorial analysis.</p></div></div></div></div></section>
+<section id="pipeline"><div class="wrap"><div class="section-head"><div class="num mono">03 / PIPELINE</div><div><h2>A media workflow, rebuilt around structured decisions.</h2></div></div><div class="flow">
+<div class="step"><span class="n mono">01</span><b>Source</b><p>Long-form video from a supported source.</p></div><div class="step"><span class="n mono">02</span><b>Understand</b><p>Transcription and structured story representation.</p></div><div class="step"><span class="n mono">03</span><b>Reason</b><p>Story grouping, ranking, context and editorial checks.</p></div><div class="step"><span class="n mono">04</span><b>Edit</b><p>Filler removal, selections, reframing and captions.</p></div><div class="step"><span class="n mono">05</span><b>Publish</b><p>Social-ready outputs and editable timelines.</p></div>
+</div></div></section>
+<section id="engineering"><div class="wrap"><div class="section-head"><div class="num mono">04 / ENGINEERING</div><div><h2>Built as an editorial system, not a demo wrapper.</h2><p class="sub">The project combines a Python editorial layer, a Rust mechanical core, deterministic validation and a web/desktop surface. The architecture is designed so AI decisions can become measurable, testable parts of a real editing workflow.</p></div></div>
+<div class="outputs"><div class="output"><strong>Python editorial layer</strong><p>Transcription, story grouping, editorial logic, context safeguards and orchestration.</p></div><div class="output"><strong>Rust core</strong><p>Mechanical media operations and performance-sensitive processing.</p></div><div class="output"><strong>Editable timelines</strong><p>FCPXML and CMX 3600 EDL generation with structural validation.</p></div><div class="output"><strong>Desktop direction</strong><p>A local-first Windows application is being productized around the same engine.</p></div></div>
+<div class="proof" style="margin-top:18px"><div class="card"><div class="tag mono">WHAT IS REAL</div><h3>Working engine</h3><p>Local-file editorial processing, transcription, story analysis, captions, reframing and render pipelines have been implemented and tested.</p></div><div class="card"><div class="tag mono">WHAT IS NEXT</div><h3>Real editors</h3><p>The next proof is not another feature. It is editor usage, measured time saved, workflow fit and eventually repeatable customer value.</p></div><div class="card"><div class="tag mono">OPEN BUILD</div><h3>Follow the work</h3><p>The repository documents the engineering, tests, limitations and remaining validation instead of hiding unfinished parts behind marketing language.</p></div></div>
+<p class="truth mono">STATUS: EARLY PRODUCT · ZERO CLAIMS OF CUSTOMER TRACTION · VALIDATION IN PROGRESS</p></div></section>
+<section id="build" class="cta"><div class="wrap"><div class="cta-inner"><div><div class="eyebrow mono">05 / BUILD IN PUBLIC</div><h2>Watch an editorial engine become a product.</h2><p class="sub">Follow the repository for experiments, engineering progress, validation and the decisions behind SelekyT.</p></div><a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Open SelekyT on GitHub ↗</a></div></div></section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <span>SELEKYT © 2026</span>
-    <span class="mono">desukab.github.io / built with GitHub Pages</span>
-  </div>
-</footer>
+<footer><div class="wrap"><span>SELEKYT © 2026</span><span class="mono">desukab.github.io / built with GitHub Pages</span></div></footer>
 </body>
 </html>
