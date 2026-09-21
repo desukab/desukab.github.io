@@ -551,6 +551,30 @@
  .unfold-video:after,.unfold-timeline span{animation:none!important}.unfold-section{min-height:auto}.unfold-sticky{position:relative;height:auto;padding:80px 0}.unfold-card{position:relative!important;inset:auto!important;margin:10px 0;transform:none!important;opacity:1!important;filter:none!important}.unfold-stage{height:auto}.unfold-caption{position:relative;left:auto;bottom:auto;margin-top:15px}
 }
 
+  
+/* DEVICE-FIRST MOBILE OVERRIDE: Android/iOS touch devices get the compact editorial composition
+   even when a browser requests a desktop CSS viewport. */
+@media (hover:none) and (pointer:coarse){
+  .unfold-section{min-height:205vh!important}
+  .unfold-sticky{min-height:720px!important}
+  .unfold-wrap{grid-template-columns:1fr!important;gap:22px!important;padding-top:62px!important;width:min(calc(100% - 32px),680px)!important}
+  .unfold-intro{max-width:620px!important}
+  .unfold-intro h2{font-size:clamp(43px,12vw,70px)!important}
+  .unfold-intro p{margin-top:14px!important}
+  .unfold-stage{height:430px!important;min-height:430px!important;width:100%!important;overflow:visible!important}
+  .unfold-card{left:0!important;right:0!important;top:3%!important;height:92%!important;padding:17px!important;transform-origin:50% 55%!important}
+  .unfold-card-back,.unfold-card-mid,.unfold-card-front{left:0!important;right:0!important}
+  .unfold-card strong{font-size:25px!important}
+  .unfold-video{height:41%!important}
+  .unfold-metrics div{min-width:0!important;flex:1!important;padding:8px!important}
+  .unfold-metrics b{font-size:18px!important}
+  .unfold-caption{left:0!important;bottom:0!important;font-size:7px!important}
+}
+@media (hover:none) and (pointer:coarse) and (max-width:520px){
+  .unfold-wrap{width:calc(100% - 30px)!important}
+  .unfold-stage{height:425px!important;min-height:425px!important}
+}
+
   </style>
 </head>
 <body>
@@ -1104,7 +1128,7 @@
     const p=clamp(-r.top/travel,0,1);
     section.style.setProperty('--unfold-progress',p);
     // The stack breathes open, then settles into a clean editorial tableau.
-    const mobile=window.matchMedia('(max-width: 850px)').matches;
+    const mobile=window.matchMedia('(max-width: 850px)').matches || window.matchMedia('(hover:none) and (pointer:coarse)').matches;
     const spreads=[
       {x:-2,y:0,z:0,ry:-7,s:.90,o:.38},
       {x:0,y:0,z:0,ry:3,s:.95,o:.70},
