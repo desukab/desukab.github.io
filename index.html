@@ -12,21 +12,23 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>SelekyT — AI Editorial Engine</title>
   <style>
+    @font-face{font-family:"NDot57";src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ndot57.ttf") format("truetype");font-display:swap}
+    @font-face{font-family:"NType82";src:url("https://cdn.jsdelivr.net/gh/xeji01/nothingfont@main/fonts/ntype82-regular.otf") format("opentype");font-display:swap}
     :root{--bg:#070707;--panel:#0d0d0d;--line:#242424;--text:#f4f4f0;--muted:#999;--soft:#c9c9c2;--accent:#d9ff4a;--max:1180px}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:"Nothing","NDot","NType","Noto Sans",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"NType82","NType",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
     a{color:inherit;text-decoration:none}
     .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
-    .mono{font-family:"Nothing","NDot","NType","Noto Sans Mono","SFMono-Regular",Consolas,monospace}
+    .mono{font-family:"NDot57","NDot","SFMono-Regular",Consolas,monospace}
     header{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(7,7,7,.82);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
     nav{height:68px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.04em;font-size:20px}
-    .logo{width:25px;height:25px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px}
-    .logo span{border:1.5px solid var(--text);display:block}
+    .brand{display:flex;align-items:center;gap:12px;font-family:"NDot57","NDot",monospace;font-weight:400;letter-spacing:.02em;font-size:23px}
+    .logo{width:28px;height:28px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;flex:none}
+    .logo span{border:2px solid var(--text);display:block;border-radius:1px}
     .logo span:nth-child(2),.logo span:nth-child(4),.logo span:nth-child(5),.logo span:nth-child(8){border-color:var(--accent)}
-    .logo span:nth-child(5){background:var(--accent)}
-    .links{display:flex;gap:26px;color:#aaa;font-size:13px}
+    .logo span:nth-child(5){background:var(--accent);border-color:var(--accent)}
+    .links{display:flex;gap:26px;color:#aaa;font-size:13px}.links .social{color:var(--accent)}
     .links a:hover{color:#fff}
     .nav-cta{border:1px solid #383838;border-radius:999px;padding:9px 15px;font-size:12px}
     .nav-cta:hover{border-color:#777}
@@ -85,7 +87,7 @@
     <span class="logo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
     <span>SelekyT</span>
   </a>
-  <div class="links"><a href="#product">Product</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a></div>
+  <div class="links"><a href="#product">Product</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a><a class="social" href="https://x.com/SeleKyT" target="_blank" rel="noopener">X ↗</a></div>
   <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
 </nav></div></header>
 <main>
@@ -94,7 +96,7 @@
   <h1>Long-form video.<br><span>Edited by intelligence.</span></h1>
   <div class="hero-copy"><div>
     <p class="lead">SelekyT turns long-form video into structured, editable, publishable stories — doing the first-pass editorial work while keeping humans in control.</p>
-    <div class="buttons"><a class="button primary" href="#product">See how it works ↓</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
+    <div class="buttons"><a class="button primary" href="#product">See how it works ↓</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow the build on X ↗</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
   </div><p class="hero-note mono">Built local-first.<br>Designed for creators, editors, newsrooms and media teams.<br><br>Early product. Real engineering. No invented traction.</p></div>
 </div></section>
 <section id="product"><div class="wrap"><div class="section-head"><div class="num mono">02 / THE PRODUCT</div><div><h2>The first editorial pass should not take all day.</h2><p class="sub">A long recording contains stories, dead air, repetition, context and moments worth publishing. SelekyT is being built to find and shape those moments before the human editor takes over.</p></div></div>
@@ -107,7 +109,7 @@
 <div class="outputs"><div class="output"><strong>Python editorial layer</strong><p>Transcription, story grouping, editorial logic, context safeguards and orchestration.</p></div><div class="output"><strong>Rust core</strong><p>Mechanical media operations and performance-sensitive processing.</p></div><div class="output"><strong>Editable timelines</strong><p>FCPXML and CMX 3600 EDL generation with structural validation.</p></div><div class="output"><strong>Desktop direction</strong><p>A local-first Windows application is being productized around the same engine.</p></div></div>
 <div class="proof" style="margin-top:18px"><div class="card"><div class="tag mono">WHAT IS REAL</div><h3>Working engine</h3><p>Local-file editorial processing, transcription, story analysis, captions, reframing and render pipelines have been implemented and tested.</p></div><div class="card"><div class="tag mono">WHAT IS NEXT</div><h3>Real editors</h3><p>The next proof is not another feature. It is editor usage, measured time saved, workflow fit and eventually repeatable customer value.</p></div><div class="card"><div class="tag mono">OPEN BUILD</div><h3>Follow the work</h3><p>The repository documents the engineering, tests, limitations and remaining validation instead of hiding unfinished parts behind marketing language.</p></div></div>
 <p class="truth mono">STATUS: EARLY PRODUCT · ZERO CLAIMS OF CUSTOMER TRACTION · VALIDATION IN PROGRESS</p></div></section>
-<section id="build" class="cta"><div class="wrap"><div class="cta-inner"><div><div class="eyebrow mono">05 / BUILD IN PUBLIC</div><h2>Watch an editorial engine become a product.</h2><p class="sub">Follow the repository for experiments, engineering progress, validation and the decisions behind SelekyT.</p></div><a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Open SelekyT on GitHub ↗</a></div></div></section>
+<section id="build" class="cta"><div class="wrap"><div class="cta-inner"><div><div class="eyebrow mono">05 / BUILD IN PUBLIC</div><h2>Watch an editorial engine become a product.</h2><p class="sub">See the product, follow the build, and watch the editorial engine take shape in public.</p><p class="sub">Follow the repository for experiments, engineering progress, validation and the decisions behind SelekyT.</p></div><div class="buttons"><a class="button primary" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore SelekyT ↗</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a></div></div></div></section>
 </main>
 <footer><div class="wrap"><span>SELEKYT © 2026</span><span class="mono">desukab.github.io / built with GitHub Pages</span></div></footer>
 </body>
