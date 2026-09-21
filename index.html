@@ -36,6 +36,16 @@
     .nav-cta:hover{border-color:#777}
     .menu-btn{display:none;border:1px solid #333;background:#0b0b0b;color:#eee;border-radius:999px;padding:9px 13px;cursor:pointer}
     .mobile-menu{display:none}
+    .mobile-menu-inner{display:grid;gap:18px}
+    .mobile-menu-label{font:8px NDot57,monospace;color:#555;letter-spacing:.16em;text-transform:uppercase;padding-top:8px}
+    .mobile-menu-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .mobile-menu-links a{display:flex;align-items:center;justify-content:space-between;padding:14px 12px;border:1px solid #292929;background:#0b0b0b;font-size:12px;color:#ddd}
+    .mobile-menu-links a:hover{border-color:#555}
+    .mobile-menu-links a span{color:#555;font:8px NDot57,monospace}
+    .mobile-menu-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .mobile-menu-actions a{display:flex;align-items:center;justify-content:center;padding:12px;border:1px solid #292929;font-size:11px;color:#aaa}
+    .mobile-menu-actions a:first-child{background:var(--accent);color:#080808;border-color:var(--accent)}
+    .mobile-menu-status{border-top:1px solid #202020;padding-top:12px;color:#555;font:8px NDot57,monospace;letter-spacing:.1em}
     .hero{min-height:92vh;display:flex;align-items:center;padding:150px 0 90px;border-bottom:1px solid var(--line)}
     .eyebrow{color:var(--accent);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
     h1{font-size:clamp(54px,9vw,122px);line-height:.88;letter-spacing:-.075em;max-width:1050px;margin:0 0 34px;font-weight:800}
@@ -251,10 +261,9 @@
     @media(max-width:850px){
       .links{display:none}.menu-btn{display:block}
       .nav-cta{display:none}
-      .mobile-menu{position:absolute;top:68px;left:0;right:0;background:rgba(7,7,7,.97);border-bottom:1px solid #242424;padding:10px 20px 16px}
+      .mobile-menu{position:absolute;top:68px;left:0;right:0;background:rgba(7,7,7,.98);border-bottom:1px solid #242424;padding:14px 20px 18px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
       .mobile-menu.open{display:grid}
-      .mobile-menu a{padding:13px 0;border-bottom:1px solid #202020;font-size:13px}
-      .mobile-menu a:last-child{border:0;color:var(--accent)}
+      .mobile-menu a{transition:border-color .2s,background .2s,color .2s}
       .hero{padding-top:130px;min-height:auto}
       .hero-copy{grid-template-columns:1fr;gap:28px}
       .hero-note{max-width:520px}
@@ -275,7 +284,7 @@
       .spotlight{display:none}
 
       .wrap{width:min(calc(100% - 28px),var(--max))}
-      nav{height:60px}.mobile-menu{top:60px;padding-left:14px;padding-right:14px}
+      nav{height:60px}.mobile-menu{top:60px;padding-left:14px;padding-right:14px}.mobile-menu-links{grid-template-columns:1fr}.mobile-menu-actions{grid-template-columns:1fr 1fr}
       .brand{font-size:20px}.logo{width:25px;height:25px}
       h1{font-size:clamp(49px,16vw,78px);margin-bottom:26px}
       .hero{padding:112px 0 64px}
@@ -537,7 +546,21 @@
       <a class="nav-cta" href="https://github.com/desukab/SeleKyT" target="_blank" rel="noopener">View GitHub ↗</a>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#product">Product</a><a href="#demo">Demo</a><a href="#outcome">Why it matters</a><a href="#build">Build in public</a><a href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a><a href="https://github.com/desukab/SeleKyT" target="_blank" rel="noopener">View GitHub ↗</a>
+      <div class="mobile-menu-inner">
+        <div class="mobile-menu-label">Navigate</div>
+        <div class="mobile-menu-links">
+          <a href="#product">Product <span>01</span></a>
+          <a href="#demo">Interactive demo <span>02</span></a>
+          <a href="#outcome">What changes <span>03</span></a>
+          <a href="#build">Build in public <span>04</span></a>
+        </div>
+        <div class="mobile-menu-label">Explore the project</div>
+        <div class="mobile-menu-actions">
+          <a href="https://github.com/desukab/SeleKyT" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow on X ↗</a>
+        </div>
+        <div class="mobile-menu-status">EARLY PRODUCT / REAL ENGINEERING / NO INVENTED TRACTION</div>
+      </div>
     </div>
   </div>
 </header>
