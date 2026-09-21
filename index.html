@@ -76,6 +76,21 @@
     .cta h2{max-width:700px}
     footer{padding:28px 0;color:#666;font-size:11px}
     footer .wrap{display:flex;justify-content:space-between;gap:20px}
+
+    .demo{background:#080808}
+    .demo-shell{border:1px solid #252525;background:#0b0b0b;overflow:hidden}
+    .demo-top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #222;color:#777;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+    .demo-live{color:var(--accent)}
+    .demo-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#222}
+    .demo-node{background:#0b0b0b;min-height:230px;padding:24px;position:relative;display:flex;flex-direction:column;justify-content:space-between;animation:demoPulse 5s ease-in-out infinite}
+    .demo-node:nth-child(2){animation-delay:.4s}.demo-node:nth-child(3){animation-delay:.8s}.demo-node:nth-child(4){animation-delay:1.2s}.demo-node:nth-child(5){animation-delay:1.6s}
+    .demo-icon{width:52px;height:52px;border:1px solid #3a3a3a;display:grid;place-items:center;font-size:22px;color:#ddd}
+    .demo-node:nth-child(3) .demo-icon,.demo-node:nth-child(4) .demo-icon{border-color:var(--accent);color:var(--accent)}
+    .demo-node strong{font-size:14px}.demo-node small{color:#666;font-size:11px;line-height:1.5}
+    .demo-arrow{position:absolute;right:-9px;top:50%;z-index:2;color:var(--accent);font-size:16px}
+    .demo-footer{display:flex;justify-content:space-between;gap:20px;padding:18px 20px;color:#666;font-size:11px;border-top:1px solid #222}
+    @keyframes demoPulse{0%,100%{transform:translateY(0);border-top-color:transparent}50%{transform:translateY(-4px);border-top:1px solid var(--accent)}}
+    @media(max-width:800px){.demo-flow{grid-template-columns:1fr}.demo-node{min-height:145px}.demo-arrow{display:none}}
     @media(max-width:800px){.links{display:none}.hero-copy,.showcase,.section-head{grid-template-columns:1fr}.hero{min-height:auto}.hero-note{margin-top:10px}.flow{grid-template-columns:1fr}.step{min-height:130px;border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.step b{margin:35px 0 7px}.outputs,.proof{grid-template-columns:1fr 1fr}.cta-inner{padding:32px;display:block}.cta .button{margin-top:28px}.section-head{gap:15px}}
     @media(max-width:520px){.wrap{width:min(calc(100% - 28px),var(--max))}h1{font-size:55px}.outputs,.proof{grid-template-columns:1fr}.card{padding:23px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
@@ -87,7 +102,7 @@
     <span class="logo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
     <span>SelekyT</span>
   </a>
-  <div class="links"><a href="#product">Product</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a><a class="social" href="https://x.com/SeleKyT" target="_blank" rel="noopener">X ↗</a></div>
+  <div class="links"><a href="#product">Product</a><a href="#demo">Demo</a><a href="#pipeline">Pipeline</a><a href="#engineering">Engineering</a><a href="#build">Build in public</a><a class="social" href="https://x.com/SeleKyT" target="_blank" rel="noopener">X ↗</a></div>
   <a class="nav-cta" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">View GitHub ↗</a>
 </nav></div></header>
 <main>
@@ -96,12 +111,26 @@
   <h1>Long-form video.<br><span>Edited by intelligence.</span></h1>
   <div class="hero-copy"><div>
     <p class="lead">SelekyT turns long-form video into structured, editable, publishable stories — doing the first-pass editorial work while keeping humans in control.</p>
-    <div class="buttons"><a class="button primary" href="#product">See how it works ↓</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow the build on X ↗</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
+    <div class="buttons"><a class="button primary" href="#demo">See it in action ↓</a><a class="button" href="https://x.com/SeleKyT" target="_blank" rel="noopener">Follow the build on X ↗</a><a class="button" href="https://github.com/desukab/selektyt" target="_blank" rel="noopener">Explore the build ↗</a></div>
   </div><p class="hero-note mono">Built local-first.<br>Designed for creators, editors, newsrooms and media teams.<br><br>Early product. Real engineering. No invented traction.</p></div>
 </div></section>
 <section id="product"><div class="wrap"><div class="section-head"><div class="num mono">02 / THE PRODUCT</div><div><h2>The first editorial pass should not take all day.</h2><p class="sub">A long recording contains stories, dead air, repetition, context and moments worth publishing. SelekyT is being built to find and shape those moments before the human editor takes over.</p></div></div>
 <div class="showcase"><div class="card large"><div class="tag mono">EDITORIAL INTELLIGENCE</div><h3>From raw footage to decisions.</h3><p>SelekyT analyzes a long-form source, builds a structured representation of what was said, groups story units, applies editorial reasoning and produces concrete edit decisions.</p><div class="terminal mono"><div><span class="green">INPUT</span> long-form video</div><div>↓ transcription</div><div>↓ story-unit detection</div><div>↓ editorial reasoning / ranking</div><div>↓ context &amp; truth checks</div><div>↓ filler / dead-air analysis</div><div>↓ reframing + captions</div><div><span class="green">OUTPUT</span> editable editorial package</div></div></div>
 <div><div class="card"><div class="tag mono">HUMAN CONTROL</div><h3>AI proposes.<br>You decide.</h3><p>The goal is not to replace editors. It is to remove repetitive first-pass work and preserve professional editorial control.</p></div><div class="card" style="margin-top:18px"><div class="tag mono">FORMAT</div><h3>One source.<br>Many outputs.</h3><p>Selections, transcripts, captions, 16:9 and 9:16 renders, and editable timeline representations can all come from the same editorial analysis.</p></div></div></div></div></section>
+
+<section id="demo" class="demo"><div class="wrap"><div class="section-head"><div class="num mono">02.5 / SEE IT</div><div><h2>From hours of footage to an editorial decision.</h2><p class="sub">A living product walkthrough of the SeleKyT pipeline. The next step is to replace this with a verified render from the engine itself — no mock product footage.</p></div></div>
+<div class="demo-shell">
+  <div class="demo-top"><span>SELEKYT / EDITORIAL WALKTHROUGH</span><span class="demo-live mono">SYSTEM FLOW · LIVE</span></div>
+  <div class="demo-flow">
+    <div class="demo-node"><span class="demo-icon">▶</span><div><strong>VIDEO IN</strong><br><small>Long-form source<br>hours of footage</small></div><span class="demo-arrow">→</span></div>
+    <div class="demo-node"><span class="demo-icon">◫</span><div><strong>TRANSCRIBE</strong><br><small>Speech becomes<br>structured data</small></div><span class="demo-arrow">→</span></div>
+    <div class="demo-node"><span class="demo-icon">≡</span><div><strong>FIND STORIES</strong><br><small>Story units are<br>grouped and ranked</small></div><span class="demo-arrow">→</span></div>
+    <div class="demo-node"><span class="demo-icon">✦</span><div><strong>EDIT WITH AI</strong><br><small>Filler, reframing,<br>captions and decisions</small></div><span class="demo-arrow">→</span></div>
+    <div class="demo-node"><span class="demo-icon">↗</span><div><strong>MULTI-FORMAT</strong><br><small>16:9 · 9:16 · editable<br>timeline outputs</small></div></div>
+  </div>
+  <div class="demo-footer"><span>LONG VIDEOS → BETTER STORIES</span><span class="mono">HUMAN-IN-CONTROL</span></div>
+</div>
+</div></section>
 <section id="pipeline"><div class="wrap"><div class="section-head"><div class="num mono">03 / PIPELINE</div><div><h2>A media workflow, rebuilt around structured decisions.</h2></div></div><div class="flow">
 <div class="step"><span class="n mono">01</span><b>Source</b><p>Long-form video from a supported source.</p></div><div class="step"><span class="n mono">02</span><b>Understand</b><p>Transcription and structured story representation.</p></div><div class="step"><span class="n mono">03</span><b>Reason</b><p>Story grouping, ranking, context and editorial checks.</p></div><div class="step"><span class="n mono">04</span><b>Edit</b><p>Filler removal, selections, reframing and captions.</p></div><div class="step"><span class="n mono">05</span><b>Publish</b><p>Social-ready outputs and editable timelines.</p></div>
 </div></div></section>
