@@ -219,6 +219,14 @@
       .wave i,.preview-timeline b{animation:none!important}
     }
 
+    /* Demo live-state */
+    .demo-launch{position:relative;overflow:hidden}
+    .demo-launch:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);box-shadow:0 0 16px var(--accent)}
+    .demo-launch.playing:after{width:100%;transition:width 15s linear}
+    .demo-launch.playing .demo-mini{color:var(--accent)}
+    .demo-launch.playing h3:after{content:"  / LIVE";font:9px NDot57,monospace;color:var(--accent);letter-spacing:.12em}
+    .tour-card.live-focus{border-color:var(--accent);box-shadow:0 0 35px rgba(217,255,74,.07);transform:translateY(-6px)}
+
     /* Advanced motion layer */
     .scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;background:transparent;z-index:40;pointer-events:none}
     .scroll-progress i{display:block;width:0;height:100%;background:var(--accent);box-shadow:0 0 14px rgba(217,255,74,.55);transform-origin:left}
@@ -742,13 +750,17 @@
         <div><h2>Watch the edit happen.</h2><p class="sub">Don't read a feature list. Swipe, drag or use the arrows. This is the product idea in six moves.<div class="section-reveal-line"></div></p></div>
       </div>
       <div class="demo-launch">
-        <div><span class="demo-mini mono">PRODUCT TOUR · 01—06</span><h3>From raw footage<br>to an editable story.</h3></div>
-        <div class="demo-controls" aria-label="Demo controls">
-          <button class="demo-arrow" id="prev" aria-label="Previous demo card">←</button>
-          <button class="demo-arrow" id="next" aria-label="Next demo card">→</button>
-        </div>
+      <div>
+        <div class="demo-mini">LIVE EDITORIAL SIMULATION</div>
+        <h3>Watch SeleKyT think.</h3>
       </div>
-      <div class="demo-rail" id="demoRail" tabindex="0" aria-label="Interactive SeleKyT product tour">
+      <div class="demo-controls">
+        <button class="demo-arrow" id="demoAuto" aria-label="Play walkthrough">▶</button>
+        <button class="demo-arrow" id="prev" aria-label="Previous">←</button>
+        <button class="demo-arrow" id="next" aria-label="Next">→</button>
+      </div>
+    </div>
+    <div class="demo-rail" id="demoRail" tabindex="0" aria-label="Interactive SeleKyT product tour">
         <article class="tour-card" data-index="0">
           <div class="tour-top"><span>01 / INPUT</span><span>VIDEO</span></div>
           <div class="fake-video"><div class="play">▶</div><span>02:47:18</span></div>
@@ -787,74 +799,6 @@
   </section>
 
 
-  <section id="livewalk" class="livewalk motion-section">
-    <div class="wrap">
-      <div class="livewalk-head">
-        <div>
-          <div class="livewalk-kicker mono">LIVE PRODUCT WALKTHROUGH</div>
-          <h2>Don't read about the workflow.<br><span style="color:#555">Experience it.</span></h2>
-          <p class="sub">A live simulation of the editorial pass — from raw long-form footage to an editable starting point.</p>
-        </div>
-        <div class="livewalk-badge"><i></i>INTERACTIVE / RUN IT YOURSELF</div>
-      </div>
-      <div class="live-stage" id="liveStage">
-        <div class="live-top"><span>SELEKYT / EDITORIAL ENGINE</span><span id="liveClock">READY</span><span class="live-dots"><i></i><i></i><i></i></span></div>
-        <div class="live-body">
-          <aside class="live-source">
-            <div class="pane-label mono">SOURCE / LONG-FORM</div>
-            <h3>THE<br>RAW<br>FOOTAGE.</h3>
-            <div class="live-video"><div class="live-video-ring">▶</div></div>
-            <div class="live-meta">
-              <div><span>DURATION</span><b>02:14:08</b></div>
-              <div><span>WORDS</span><b>18,420</b></div>
-              <div><span>FORMAT</span><b>16:9 / 29.97</b></div>
-              <div><span>STATUS</span><b id="liveSourceStatus">WAITING</b></div>
-            </div>
-          </aside>
-          <div class="live-right">
-            <div class="live-stepbar">
-              <div class="live-step active" data-live-step="0"><b>01</b>UNDERSTAND</div>
-              <div class="live-step" data-live-step="1"><b>02</b>FIND</div>
-              <div class="live-step" data-live-step="2"><b>03</b>SHAPE</div>
-              <div class="live-step" data-live-step="3"><b>04</b>HAND OFF</div>
-            </div>
-            <div class="live-panel">
-              <div class="live-view active" data-live-view="0">
-                <div class="live-view-label">TRANSCRIPT / SIGNAL</div><h4>First, understand<br>what's being said.</h4>
-                <div class="live-transcript" id="liveTranscript"><span>We</span> <span>started</span> <span>with</span> <span>one</span> <span>question:</span> <span>what</span> <span>actually</span> <span>matters</span> <span>in</span> <span>two</span> <span>hours</span> <span>of</span> <span>footage?</span></div>
-              </div>
-              <div class="live-view" data-live-view="1">
-                <div class="live-view-label">STORY DETECTION / RANKING</div><h4>The story starts<br>to emerge.</h4>
-                <div class="live-storygrid">
-                  <div class="live-story"><b>01</b><strong>The origin of the idea</strong><small>94</small></div>
-                  <div class="live-story"><b>02</b><strong>The turning point</strong><small>91</small></div>
-                  <div class="live-story"><b>03</b><strong>The key insight</strong><small>88</small></div>
-                  <div class="live-story"><b>04</b><strong>Repeated explanation</strong><small>31</small></div>
-                </div>
-              </div>
-              <div class="live-view" data-live-view="2">
-                <div class="live-view-label">FIRST PASS / EDITORIAL SEQUENCE</div><h4>AI shapes<br>the starting point.</h4>
-                <div class="live-edit" id="liveEdit"><div class="live-playhead" id="livePlayhead"></div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                <p class="sub">Keep the story. Remove repetition. Prepare framing and captions. Preserve the editor's control.</p>
-              </div>
-              <div class="live-view" data-live-view="3">
-                <div class="live-view-label">OUTPUT / READY FOR THE EDITOR</div><h4>One editorial pass.<br>Multiple ways forward.</h4>
-                <div class="live-output">
-                  <div><b>16:9</b><small>MASTER</small></div><div><b>9:16</b><small>VERTICAL</small></div><div><b>CC</b><small>CAPTIONS</small></div><div><b>EDL</b><small>EDITABLE</small></div>
-                </div>
-              </div>
-            </div>
-            <div class="live-control">
-              <div class="live-status" id="liveStatus">SYSTEM <b>READY</b> · PRESS START TO EXPERIENCE</div>
-              <button class="live-start" id="liveStart">START WALKTHROUGH →</button>
-            </div>
-          </div>
-        </div>
-        <div class="live-progress"><i id="liveProgress"></i></div>
-      </div>
-    </div>
-  </section>
-
   <section id="outcome" class="reveal motion-section"><div class="section-beacon" aria-hidden="true"><i style="--delay:3s"></i></div><div class="section-marker mono">EDITOR OUTCOME</div>
     <div class="wrap">
       <div class="section-head">
@@ -866,15 +810,7 @@
         <div class="outcome"><div class="big mono">02</div><h3>SHAPE</h3><p>Turn those decisions into a first-pass edit with selections, captions, framing and structure.</p></div>
         <div class="outcome"><div class="big mono">03</div><h3>HAND OFF</h3><p>Give the editor an editable starting point — not a final answer they cannot change.</p></div>
       </div>
-      <div class="editor-line"><strong>AI proposes. You decide.</strong><span>The goal is an editor with a head start, not an editor replaced by a button.</span></div>
-    </div>
-  </section>
-
-  <section class="manifesto motion-section"><div class="section-marker mono">THE SHIFT</div>
-    <div class="wrap">
-      <div class="eyebrow mono">04 / THE SHIFT</div>
-      <h2>Hours of footage.<br><span>Minutes of judgment.</span></h2>
-      <p class="manifesto-note">The ambition is not to replace the editor. It is to move the editor closer to the interesting part of the work.</p>
+      
     </div>
   </section>
 
@@ -883,8 +819,8 @@
       <div class="cta-inner">
         <div>
           <div class="eyebrow mono">07 / BUILD IN PUBLIC</div>
-          <h2>Watch an editorial engine become a product.</h2>
-          <p class="sub">The repository is public. The build is public. The validation is still happening.</p>
+          <h2>See the build in public.</h2>
+          <p class="sub">Real engineering. Real validation. Built in public.</p>
         </div>
         <div class="buttons">
           <a class="button primary magnetic" href="https://github.com/desukab/SeleKyT" target="_blank" rel="noopener">Explore SeleKyT ↗</a>
@@ -919,6 +855,18 @@
     const name=cards[active].querySelector('.tour-top span:last-child').textContent;
     status.textContent=(String(active+1).padStart(2,'0'))+' / 06 · '+name+' · SWIPE / DRAG';
   }
+
+  let autoTimer=null;
+  const launch=document.querySelector('.demo-launch'), autoBtn=document.getElementById('demoAuto');
+  function stopAuto(){clearInterval(autoTimer);autoTimer=null;launch.classList.remove('playing');autoBtn.textContent='▶';}
+  function startAuto(){
+    if(autoTimer){stopAuto();return;}
+    launch.classList.add('playing');autoBtn.textContent='Ⅱ';
+    setActive(0);
+    autoTimer=setInterval(()=>{ if(active>=cards.length-1){stopAuto();return;} setActive(active+1); },2500);
+  }
+  autoBtn.addEventListener('click',startAuto);
+  cards.forEach((card,i)=>card.addEventListener('click',()=>{stopAuto();setActive(i);}));
 
   prev.addEventListener('click',()=>setActive(active-1));
   next.addEventListener('click',()=>setActive(active+1));
