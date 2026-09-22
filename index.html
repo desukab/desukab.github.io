@@ -786,6 +786,75 @@
     </div>
   </section>
 
+
+  <section id="livewalk" class="livewalk motion-section">
+    <div class="wrap">
+      <div class="livewalk-head">
+        <div>
+          <div class="livewalk-kicker mono">LIVE PRODUCT WALKTHROUGH</div>
+          <h2>Don't read about the workflow.<br><span style="color:#555">Experience it.</span></h2>
+          <p class="sub">A live simulation of the editorial pass — from raw long-form footage to an editable starting point.</p>
+        </div>
+        <div class="livewalk-badge"><i></i>INTERACTIVE / RUN IT YOURSELF</div>
+      </div>
+      <div class="live-stage" id="liveStage">
+        <div class="live-top"><span>SELEKYT / EDITORIAL ENGINE</span><span id="liveClock">READY</span><span class="live-dots"><i></i><i></i><i></i></span></div>
+        <div class="live-body">
+          <aside class="live-source">
+            <div class="pane-label mono">SOURCE / LONG-FORM</div>
+            <h3>THE<br>RAW<br>FOOTAGE.</h3>
+            <div class="live-video"><div class="live-video-ring">▶</div></div>
+            <div class="live-meta">
+              <div><span>DURATION</span><b>02:14:08</b></div>
+              <div><span>WORDS</span><b>18,420</b></div>
+              <div><span>FORMAT</span><b>16:9 / 29.97</b></div>
+              <div><span>STATUS</span><b id="liveSourceStatus">WAITING</b></div>
+            </div>
+          </aside>
+          <div class="live-right">
+            <div class="live-stepbar">
+              <div class="live-step active" data-live-step="0"><b>01</b>UNDERSTAND</div>
+              <div class="live-step" data-live-step="1"><b>02</b>FIND</div>
+              <div class="live-step" data-live-step="2"><b>03</b>SHAPE</div>
+              <div class="live-step" data-live-step="3"><b>04</b>HAND OFF</div>
+            </div>
+            <div class="live-panel">
+              <div class="live-view active" data-live-view="0">
+                <div class="live-view-label">TRANSCRIPT / SIGNAL</div><h4>First, understand<br>what's being said.</h4>
+                <div class="live-transcript" id="liveTranscript"><span>We</span> <span>started</span> <span>with</span> <span>one</span> <span>question:</span> <span>what</span> <span>actually</span> <span>matters</span> <span>in</span> <span>two</span> <span>hours</span> <span>of</span> <span>footage?</span></div>
+              </div>
+              <div class="live-view" data-live-view="1">
+                <div class="live-view-label">STORY DETECTION / RANKING</div><h4>The story starts<br>to emerge.</h4>
+                <div class="live-storygrid">
+                  <div class="live-story"><b>01</b><strong>The origin of the idea</strong><small>94</small></div>
+                  <div class="live-story"><b>02</b><strong>The turning point</strong><small>91</small></div>
+                  <div class="live-story"><b>03</b><strong>The key insight</strong><small>88</small></div>
+                  <div class="live-story"><b>04</b><strong>Repeated explanation</strong><small>31</small></div>
+                </div>
+              </div>
+              <div class="live-view" data-live-view="2">
+                <div class="live-view-label">FIRST PASS / EDITORIAL SEQUENCE</div><h4>AI shapes<br>the starting point.</h4>
+                <div class="live-edit" id="liveEdit"><div class="live-playhead" id="livePlayhead"></div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <p class="sub">Keep the story. Remove repetition. Prepare framing and captions. Preserve the editor's control.</p>
+              </div>
+              <div class="live-view" data-live-view="3">
+                <div class="live-view-label">OUTPUT / READY FOR THE EDITOR</div><h4>One editorial pass.<br>Multiple ways forward.</h4>
+                <div class="live-output">
+                  <div><b>16:9</b><small>MASTER</small></div><div><b>9:16</b><small>VERTICAL</small></div><div><b>CC</b><small>CAPTIONS</small></div><div><b>EDL</b><small>EDITABLE</small></div>
+                </div>
+              </div>
+            </div>
+            <div class="live-control">
+              <div class="live-status" id="liveStatus">SYSTEM <b>READY</b> · PRESS START TO EXPERIENCE</div>
+              <button class="live-start" id="liveStart">START WALKTHROUGH →</button>
+            </div>
+          </div>
+        </div>
+        <div class="live-progress"><i id="liveProgress"></i></div>
+      </div>
+    </div>
+  </section>
+
   <section id="outcome" class="reveal motion-section"><div class="section-beacon" aria-hidden="true"><i style="--delay:3s"></i></div><div class="section-marker mono">EDITOR OUTCOME</div>
     <div class="wrap">
       <div class="section-head">
@@ -1132,6 +1201,54 @@
   },{passive:true});
   paint();
 })();
+
+
+  /* Live editorial walkthrough — a visitor-driven product simulation. */
+  (function(){
+    const start=document.getElementById('liveStart');
+    if(!start)return;
+    const views=[...document.querySelectorAll('[data-live-view]')];
+    const steps=[...document.querySelectorAll('[data-live-step]')];
+    const stories=[...document.querySelectorAll('.live-story')];
+    const words=[...document.querySelectorAll('#liveTranscript span')];
+    const bars=[...document.querySelectorAll('#liveEdit i')];
+    const playhead=document.getElementById('livePlayhead');
+    const progress=document.getElementById('liveProgress');
+    const status=document.getElementById('liveStatus');
+    const clock=document.getElementById('liveClock');
+    const sourceStatus=document.getElementById('liveSourceStatus');
+    let timer=null,running=false;
+    const wait=ms=>new Promise(r=>setTimeout(r,ms));
+    function step(i){
+      views.forEach((v,n)=>v.classList.toggle('active',n===i));
+      steps.forEach((s,n)=>s.classList.toggle('active',n===i));
+    }
+    async function run(){
+      if(running)return;
+      running=true; start.classList.add('running'); start.textContent='RUNNING…';
+      sourceStatus.textContent='ANALYZING'; clock.textContent='LIVE / PROCESSING';
+      status.innerHTML='01 / <b>UNDERSTAND</b> · READING THE SIGNAL';
+      step(0); progress.style.width='8%';
+      for(let i=0;i<words.length;i++){words.forEach(w=>w.classList.remove('hot'));words[i].classList.add('hot');await wait(110);if(i%3===0)progress.style.width=(8+i/words.length*18)+'%';}
+      words.forEach(w=>w.classList.add('mark')); await wait(350);
+      status.innerHTML='02 / <b>FIND</b> · SURFACING STORY MOMENTS'; step(1); progress.style.width='32%';
+      for(let i=0;i<stories.length;i++){await wait(320);stories[i].classList.add('show');progress.style.width=(32+i/stories.length*20)+'%';}
+      await wait(500);
+      status.innerHTML='03 / <b>SHAPE</b> · BUILDING THE FIRST PASS'; step(2); progress.style.width='54%';
+      for(let i=0;i<bars.length;i++){await wait(140);bars[i].classList.toggle('keep',i%3!==0);playhead.style.left=((i+1)/bars.length*100)+'%';progress.style.width=(54+i/bars.length*22)+'%';}
+      await wait(500);
+      status.innerHTML='04 / <b>HAND OFF</b> · PREPARING EDITABLE OUTPUTS'; step(3); progress.style.width='82%';
+      const outs=[...document.querySelectorAll('.live-output div')];for(let i=0;i<outs.length;i++){await wait(230);outs[i].classList.add('ready');}
+      await wait(600); progress.style.width='100%'; sourceStatus.textContent='READY'; clock.textContent='COMPLETE';
+      status.innerHTML='COMPLETE · <b>AI PROPOSES. YOU DECIDE.</b>';
+      start.classList.remove('running'); start.textContent='RUN AGAIN ↻'; running=false;
+    }
+    start.addEventListener('click',()=>{
+      if(running)return;
+      stories.forEach(x=>x.classList.remove('show'));bars.forEach(x=>x.classList.remove('keep'));document.querySelectorAll('.live-output div').forEach(x=>x.classList.remove('ready'));
+      words.forEach(w=>{w.classList.remove('hot','mark')});playhead.style.left='0';progress.style.width='0%';run();
+    });
+  })();
 
 </script>
 </body>
