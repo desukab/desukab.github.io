@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://desukab.github.io
+Sitemap: https://desukab.github.io/sitemap.xml
